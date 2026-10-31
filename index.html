@@ -252,6 +252,19 @@ button.wk{cursor:pointer}button.wk:hover{border-color:var(--accent)}
 .acc{max-width:720px;padding-block:32px 20px}
 .acc .rev-h{margin-bottom:20px}
 .gate-intro{margin-bottom:22px}
+.wait-card{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.wait-ico{width:56px;height:56px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center;margin-bottom:8px}
+.wait-ico svg{width:28px;height:28px;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ok-ico{background:var(--ok-soft)}.ok-ico svg{stroke:var(--ok);stroke-width:2.4}
+.warn-ico{background:color-mix(in srgb,var(--mark) 15%,transparent)}.warn-ico svg{stroke:var(--mark);stroke-width:2.6}
+.wait-card .rq{margin:6px 0 4px}
+.wait-status{display:flex;align-items:center;gap:10px;margin-top:14px;padding:12px 14px;border-radius:6px;background:var(--accent-soft);font-size:15px;width:100%}
+.wait-status.off{background:var(--paper)}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--rule);border-top-color:var(--accent);flex:none;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
+.wait-tips{margin:16px 0 4px;padding-left:18px;font-size:14px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.wait-card .acc-form{width:100%}
 .gate-intro h2{font-family:var(--f-display);font-weight:400;font-size:clamp(30px,6vw,46px);line-height:1.1;margin:8px 0 10px;text-wrap:balance}
 .gate-intro .rev-note{font-size:17px;max-width:58ch}
 .acc-switch{display:flex;gap:6px;margin-bottom:12px}
@@ -686,6 +699,12 @@ const SB=(()=>{
   catch(e){CFG_ERR="Les réglages Supabase de config.js sont refusés : "+(e&&e.message||e);return null}
 })();
 const APP_URL=location.origin+location.pathname;
+/* Arrivée par le lien de l'e-mail de confirmation (le client Supabase efface ensuite ces paramètres de l'adresse). */
+const LANDING=(()=>{const h=new URLSearchParams(location.hash.slice(1)),q=new URLSearchParams(location.search);
+  if(h.get("error_code")||q.get("error_code")||h.get("error")||q.get("error"))return{error:h.get("error_code")||q.get("error_code")||h.get("error")||q.get("error"),desc:(h.get("error_description")||q.get("error_description")||"").replace(/\+/g," ")};
+  if(h.get("type")==="signup"||q.get("type")==="signup"||h.get("type")==="email"||q.get("type")==="email")return{confirmed:true};
+  return null})();
+let CONFIRM_ACK=false;
 let SESSION=null,RECOVERY=false;
 const SY={timer:null,pushing:false,dirty:false,lastRemote:null};
 
@@ -739,13 +758,13 @@ async function initCloud(){
     const was=SESSION&&SESSION.user.id;SESSION=session;
     if(event==="PASSWORD_RECOVERY"){RECOVERY=true;if(GATED)ungate();openAccount();return}
     if(session&&session.user.id!==was){pullNow();pullThemes()}
-    if(session&&(GATED||!STARTED))setTimeout(ungate,0);
+    if(session&&(GATED||!STARTED))setTimeout(afterLogin,0);
     if(!session){setSync("local");SY.lastRemote=null;if(STARTED&&!GATED)setTimeout(gate,0)}
     if(!$("vAccount").hidden)renderAccount();
   });
   let data={session:null};try{({data}=await SB.auth.getSession())}catch(e){}
-  if(data.session){if(!SESSION||SESSION.user.id!==data.session.user.id){SESSION=data.session;pullNow();pullThemes()}ungate()}
-  else if(!SESSION)gate();
+  if(data.session){if(!SESSION||SESSION.user.id!==data.session.user.id){SESSION=data.session;pullNow();pullThemes()}afterLogin()}
+  else if(!SESSION){gate();if(LANDING&&LANDING.error){accMode="linkerror";renderAccount()}}
   document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&SESSION)pullNow()});
 }
 
@@ -765,10 +784,33 @@ function statsHTML(){
 function msgHTML(){return accMsg?`<p class="acc-msg" role="status">${accMsg}</p>`:""}
 function renderAccount(){
   const box=$("accBody");
+  if(typeof GATED!=="undefined"&&GATED)$("gateIntro").hidden=["verify","confirmed","linkerror"].includes(accMode);
   if(!SB){
     if(CFG_ERR){box.innerHTML=`<div class="rev-card"><p class="rq">Les comptes sont mal configurés.</p><p class="rev-note">${esc(CFG_ERR)}</p></div>`;return}
     box.innerHTML=`<div class="rev-card"><p class="rq">Les comptes ne sont pas encore activés.</p>
       <p class="rev-note">L'accès à UpDate demande un compte. Renseignez les deux valeurs de Supabase dans le fichier <code>config.js</code> (voir le guide d'installation).</p></div>`;return}
+  if(accMode==="verify"){renderVerify(box);return}
+  if(accMode==="confirmed"){
+    box.innerHTML=`<div class="rev-card wait-card"><div class="wait-ico ok-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <p class="rq">Adresse confirmée !</p>
+      <p class="rev-note">Votre compte UpDate est activé.</p>
+      <p class="rev-note">Si vous avez créé votre compte depuis l'application installée, retournez-y : elle se connecte toute seule si elle est restée ouverte. Sinon, ouvrez-la et connectez-vous avec votre e-mail et votre mot de passe.</p>
+      <div class="rev-act"><button class="btn" type="button" id="cfGo">Continuer ici</button></div></div>`;
+    $("cfGo").addEventListener("click",()=>{accMode="login";ungate()});return}
+  if(accMode==="linkerror"){
+    const em=store.get("pendingEmail","");
+    box.innerHTML=`<div class="rev-card wait-card"><div class="wait-ico warn-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 7v6M12 17h.01"/></svg></div>
+      <p class="rq">Ce lien ne fonctionne plus</p>
+      <p class="rev-note">Le lien de confirmation a expiré ou a déjà été utilisé. Si votre adresse est déjà confirmée, connectez-vous simplement. Sinon, demandez un nouveau lien.</p>
+      ${msgHTML()}
+      <form class="acc-form" id="leForm" novalidate><label for="accEmail">Adresse e-mail</label><input id="accEmail" type="email" autocomplete="email" value="${esc(em)}" required>
+      <div class="rev-act"><button class="btn" type="submit" id="leGo">Renvoyer un lien</button><button class="back" type="button" id="leLogin">Se connecter</button></div></form></div>`;
+    $("leLogin").addEventListener("click",()=>{accMode="login";accMsg="";renderAccount()});
+    $("leForm").addEventListener("submit",async e=>{e.preventDefault();const email=$("accEmail").value.trim();if(!/^\S+@\S+\.\S+$/.test(email)){accMsg="Cette adresse e-mail ne semble pas valide.";renderAccount();return}
+      const {error}=await SB.auth.resend({type:"signup",email,options:{emailRedirectTo:APP_URL}});
+      if(error){accMsg=esc(frErr(error));renderAccount();return}
+      PENDING={email,pw:null};accMode="verify";accMsg="";store.set("pendingEmail",email);renderAccount()});
+    return}
   if(RECOVERY&&SESSION){
     box.innerHTML=`<form class="rev-card acc-form" id="accForm"><p class="rq">Choisissez un nouveau mot de passe</p>
       <label for="accPw">Nouveau mot de passe</label><input id="accPw" type="password" autocomplete="new-password" minlength="8" required>
@@ -830,10 +872,55 @@ function renderAccount(){
     let r;
     if(isReset){r=await SB.auth.resetPasswordForEmail(email,{redirectTo:APP_URL});accMsg=r.error?esc(frErr(r.error)):"Si un compte existe pour cette adresse, un e-mail vient de lui être envoyé."}
     else if(isUp){r=await SB.auth.signUp({email,password:pw,options:{emailRedirectTo:APP_URL}});
-      accMsg=r.error?esc(frErr(r.error)):r.data.session?"Compte créé, vous êtes connecté.":"Compte créé ! Ouvrez l'e-mail de confirmation envoyé à "+esc(email)+", puis revenez ici."}
-    else{r=await SB.auth.signInWithPassword({email,password:pw});accMsg=r.error?esc(frErr(r.error)):"Vous êtes connecté."}
+      if(!r.error&&!r.data.session){startVerify(email,pw);return}
+      accMsg=r.error?esc(frErr(r.error)):"Compte créé, vous êtes connecté."}
+    else{r=await SB.auth.signInWithPassword({email,password:pw});
+      if(r.error&&/not confirmed/i.test(r.error.message||"")){startVerify(email,pw);return}
+      accMsg=r.error?esc(frErr(r.error)):"Vous êtes connecté."}
     renderAccount();if(r.error)back();
   });
+}
+/* ---- Attente de la confirmation de l'adresse e-mail ----
+   Le mot de passe saisi reste seulement en mémoire, le temps de l'attente (jamais enregistré).
+   Toutes les 6 secondes, et dès que l'on revient dans l'application, on tente la connexion :
+   elle réussit dès que le lien de l'e-mail a été ouvert, et l'application s'ouvre toute seule. */
+let PENDING=null,VPOLL=null,VPOLL_END=0,VBUSY=false,RESEND_AT=0;
+function startVerify(email,pw){PENDING={email,pw};accMode="verify";accMsg="";store.set("pendingEmail",email);startVerifyPoll();renderAccount()}
+function stopVerifyPoll(){clearInterval(VPOLL);VPOLL=null}
+function startVerifyPoll(){stopVerifyPoll();if(!PENDING||!PENDING.pw)return;VPOLL_END=Date.now()+15*60*1000;VPOLL=setInterval(tryVerifyLogin,6000)}
+async function tryVerifyLogin(manual){
+  if(VBUSY||SESSION)return;
+  if(!PENDING){const em=store.get("pendingEmail","");if(!em)return;PENDING={email:em,pw:null}}
+  if(!PENDING.pw){accMode="login";accMsg="Si vous avez confirmé votre adresse, connectez-vous.";renderAccount();if($("accEmail"))$("accEmail").value=PENDING.email;return}
+  if(!manual&&Date.now()>VPOLL_END){stopVerifyPoll();renderAccount();return}
+  VBUSY=true;
+  const {error}=await SB.auth.signInWithPassword({email:PENDING.email,password:PENDING.pw});
+  VBUSY=false;
+  if(!error)return; // la connexion déclenche l'ouverture de l'application
+  if(/not confirmed/i.test(error.message||"")){if(manual){accMsg="Pas encore confirmée. Ouvrez le lien de l'e-mail, puis réessayez.";renderAccount()}return}
+  stopVerifyPoll();accMsg=esc(frErr(error));renderAccount();
+}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&PENDING&&accMode==="verify")tryVerifyLogin()});
+function renderVerify(box){
+  const em=PENDING?PENDING.email:store.get("pendingEmail","");
+  const polling=!!VPOLL;const wait=Math.max(0,Math.ceil((RESEND_AT-Date.now())/1000));
+  box.innerHTML=`<div class="rev-card wait-card"><div class="wait-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg></div>
+    <span class="label">Étape 2 sur 2</span>
+    <p class="rq">Confirmez votre adresse e-mail</p>
+    <p class="rev-note">Nous avons envoyé un lien d'activation à <strong>${esc(em)}</strong>. Ouvrez cet e-mail et touchez le lien de confirmation.</p>
+    <div class="wait-status${polling?"":" off"}" role="status">${polling?'<span class="spin" aria-hidden="true"></span>En attente de la confirmation… UpDate s\'ouvrira automatiquement.':"Une fois l'adresse confirmée, touchez « J'ai confirmé »."}</div>
+    ${msgHTML()}
+    <div class="rev-act"><button class="btn" type="button" id="vfNow">J'ai confirmé</button>
+      <button class="back" type="button" id="vfResend" ${wait?"disabled":""}>${wait?"Renvoyer l'e-mail ("+wait+" s)":"Renvoyer l'e-mail"}</button></div>
+    <ul class="wait-tips"><li>Pas d'e-mail après 2 minutes ? Regardez dans les <strong>indésirables</strong> ou les <strong>promotions</strong>.</li>
+      <li>Le lien peut s'ouvrir dans votre navigateur : c'est normal. Revenez ensuite ici.</li></ul>
+    <button class="linkbtn" type="button" id="vfBack">Changer d'adresse e-mail</button></div>`;
+  $("vfNow").addEventListener("click",()=>{accMsg="";tryVerifyLogin(true)});
+  $("vfResend").addEventListener("click",async()=>{
+    const {error}=await SB.auth.resend({type:"signup",email:em,options:{emailRedirectTo:APP_URL}});
+    RESEND_AT=Date.now()+60000;accMsg=error?esc(frErr(error)):"Nouvel e-mail envoyé.";renderAccount();
+    const t=setInterval(()=>{if(accMode!=="verify"||Date.now()>RESEND_AT){clearInterval(t);if(accMode==="verify")renderAccount()}else{const b=$("vfResend");if(b)b.textContent="Renvoyer l'e-mail ("+Math.ceil((RESEND_AT-Date.now())/1000)+" s)"}},1000)});
+  $("vfBack").addEventListener("click",()=>{stopVerifyPoll();PENDING=null;try{localStorage.removeItem("update:pendingEmail")}catch(e){};accMode="signup";accMsg="";renderAccount()});
 }
 function frErr(e){const m=(e&&e.message||"").toLowerCase();
   if(m.includes("invalid login"))return"E-mail ou mot de passe incorrect.";
@@ -969,8 +1056,16 @@ function gate(){
   $("loading").hidden=true;$("tabs").hidden=true;$("install").hidden=true;$("hdrStats").hidden=true;
   $("gateIntro").hidden=false;$("accHead").hidden=true;
   if(location.hash)history.replaceState(null,"",location.pathname+location.search);
-  if(accMode==="login"&&!accMsg&&!store.get("hasAccount",false))accMode="signup";
+  if(accMode==="login"&&!accMsg&&!store.get("hasAccount",false))accMode=store.get("pendingEmail","")?"verify":"signup";
   showView("account");renderAccount();
+}
+/* Après connexion : si l'on arrive depuis l'e-mail de confirmation dans un onglet du navigateur,
+   on affiche d'abord « Adresse confirmée » (l'application installée, elle, se connecte toute seule). */
+function afterLogin(){
+  stopVerifyPoll();PENDING=null;try{localStorage.removeItem("update:pendingEmail")}catch(e){}
+  if(GATED&&accMode==="confirmed")return; // la page « Adresse confirmée » reste affichée jusqu'au clic
+  if(LANDING&&LANDING.confirmed&&!CONFIRM_ACK&&!standalone()){CONFIRM_ACK=true;accMode="confirmed";gate();return}
+  ungate();
 }
 function ungate(){
   const wasGated=GATED;GATED=false;

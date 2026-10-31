@@ -1,7 +1,7 @@
 """UpDate : génère les enregistrements audio (voix féminine « f » et masculine « h ») d'une ou plusieurs fiches.
 
 Usage : python3 gen_audio.py <dossier_du_site> <id> [<id> ...]
-  - lit <site>/fiches.json, écrit <site>/audio/<id>-f.mp3 et <id>-h.mp3,
+  - lit <site>/fiches.json, écrit <site>/<id>-f.mp3 et <site>/<id>-h.mp3 (à la racine du dépôt),
   - enregistre les repères de lecture dans fiches.json (champ "audio").
 Dépendances : pip install --break-system-packages piper-tts numpy ; ffmpeg.
 Les modèles de voix (Piper, licence CC-BY 4.0 / domaine public selon la voix) sont téléchargés depuis GitHub (sherpa-onnx).
@@ -58,7 +58,6 @@ def main():
     site, ids = sys.argv[1], sys.argv[2:]
     path = f"{site}/fiches.json"; data = json.load(open(path))
     byid = {f["id"]: f for f in data}
-    os.makedirs(f"{site}/audio", exist_ok=True)
     for vk, name in MODELS.items():
         m = model(name); voice = PiperVoice.load(m + ".onnx", m + ".onnx.json"); sr = voice.config.sample_rate
         cfg = SynthesisConfig(length_scale=1.0, noise_scale=0.6, noise_w_scale=0.8)
@@ -71,7 +70,7 @@ def main():
                 g = int(sr * (0.75 if k < 2 else 0.55)); pcm.append(np.zeros(g, dtype=np.int16)); n += g
             subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "s16le", "-ar", str(sr), "-ac", "1", "-i", "-",
                             "-af", "loudnorm=I=-16:TP=-1.5", "-ar", "22050", "-c:a", "libmp3lame", "-b:a", "48k",
-                            f"{site}/audio/{fid}-{vk}.mp3"], input=np.concatenate(pcm).tobytes(), check=True)
+                            f"{site}/{fid}-{vk}.mp3"], input=np.concatenate(pcm).tobytes(), check=True)
             f.setdefault("audio", {})[vk] = {"starts": starts, "dur": round(n / sr, 1)}
             print(vk, fid, round(n / sr), "s", flush=True)
     json.dump(data, open(path, "w"), ensure_ascii=False, indent=1)

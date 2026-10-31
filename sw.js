@@ -1,8 +1,8 @@
 /* UpDate — service worker : rend l'application installable et utilisable hors ligne.
    Augmentez VERSION à chaque mise à jour de index.html pour forcer le rafraîchissement. */
-const VERSION = "update-v1";
+const VERSION = "update-v2";
 const SHELL = ["./", "index.html", "config.js", "manifest.webmanifest", "fiches.json",
-  "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "icons/favicon-32.png"];
+  "icon-192.png", "icon-512.png", "apple-touch-icon.png", "favicon-32.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -50,7 +50,7 @@ self.addEventListener("fetch", e => {
 
   if (url.origin === self.location.origin) {
     // L'audio passe directement par le réseau (lecture progressive, fichiers lourds).
-    if (url.pathname.includes("/audio/")) return;
+    if (url.pathname.endsWith(".mp3")) return;
     if (req.mode === "navigate" || url.pathname.endsWith("/fiches.json") ||
         url.pathname.endsWith("/index.html") || url.pathname.endsWith("/config.js")) {
       e.respondWith(networkFirst(req));

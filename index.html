@@ -7,8 +7,8 @@
 <meta name="description" content="Chaque jour, une information de culture générale détaillée, avec photo, sources, lecture audio et révisions.">
 <meta name="theme-color" content="#2F43C9">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="UpDate">
@@ -628,7 +628,7 @@ function curTim(){const a=ficheOn(shownDate).audio;return a&&a[voiceKey]?a[voice
 function loadAudio(keepTime){
   const f=ficheOn(shownDate);const t=keepTime?aud.currentTime:0;const was=!aud.paused;
   $("audio").hidden=!(f.audio&&f.audio[voiceKey]);
-  aud.src="audio/"+f.id+"-"+voiceKey+".mp3";aud.playbackRate=+$("aRate").value;
+  aud.src=f.id+"-"+voiceKey+".mp3";aud.playbackRate=+$("aRate").value;
   try{aud.preservesPitch=true}catch(e){}
   segEls=[$("hTitle"),$("hLede"),...$("fBody").querySelectorAll("h2,p"),$("fKeep")];
   $("aDur").textContent=fmt(curTim().dur);$("aTime").textContent=fmt(t);

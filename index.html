@@ -268,6 +268,7 @@ button.wk{cursor:pointer}button.wk:hover{border-color:var(--accent)}
 .acc-stats strong{font-family:var(--f-display);font-weight:400;font-size:30px;font-variant-numeric:tabular-nums}
 .acc-stats span{font-size:13px;color:var(--muted)}
 .acc-actions .rev-act{margin-top:0}
+.push-card,.acc-actions{margin-bottom:14px}
 .linkbtn{font:inherit;font-size:14px;background:none;border:0;color:var(--accent);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:8px 4px}
 .danger{color:var(--mark);border-color:var(--mark)}
 .danger-btn{background:var(--mark)}
@@ -786,6 +787,7 @@ function renderAccount(){
     box.innerHTML=`<div class="rev-card"><span class="label">Connecté</span><p class="rq acc-mail">${esc(u.email||"")}</p>
       <p class="rev-note">Membre depuis le ${fmtDate(u.created_at)}. Votre progression, vos révisions, votre voix et vos thèmes vous suivent sur tous vos appareils.</p>${msgHTML()}</div>
       ${statsHTML()}
+      <div class="rev-card push-card" id="pushCard"></div>
       <div class="rev-card acc-actions">
         <div class="rev-act"><button class="back" type="button" id="accPwBtn">Changer de mot de passe</button>
         <button class="back" type="button" id="accOut">Se déconnecter</button>
@@ -793,12 +795,13 @@ function renderAccount(){
         <div id="accDelBox" hidden><p class="rev-note">La suppression efface votre compte, votre progression et vos thèmes, définitivement. Pour confirmer, tapez <strong>SUPPRIMER</strong>.</p>
           <input id="accDelIn" type="text" autocomplete="off" aria-label="Tapez SUPPRIMER pour confirmer"><div class="rev-act"><button class="btn danger-btn" type="button" id="accDelGo" disabled>Supprimer définitivement</button></div></div>
       </div>`;
+    renderPush();
     $("accPwBtn").addEventListener("click",async()=>{const {error}=await SB.auth.resetPasswordForEmail(u.email,{redirectTo:APP_URL});
       accMsg=error?"L'e-mail n'a pas pu être envoyé : "+esc(frErr(error)):"Un e-mail vous a été envoyé avec un lien pour choisir un nouveau mot de passe.";renderAccount()});
-    $("accOut").addEventListener("click",async()=>{clearTimeout(SY.timer);await pushNow();await SB.auth.signOut();clearLocalProgress();SESSION=null;accMsg="Vous êtes déconnecté. Votre progression reste enregistrée dans votre compte.";accMode="login";gate()});
+    $("accOut").addEventListener("click",async()=>{clearTimeout(SY.timer);await pushNow();await disablePush(true);await SB.auth.signOut();clearLocalProgress();SESSION=null;accMsg="Vous êtes déconnecté. Votre progression reste enregistrée dans votre compte.";accMode="login";gate()});
     $("accDel").addEventListener("click",()=>{$("accDelBox").hidden=false;$("accDelIn").focus()});
     $("accDelIn").addEventListener("input",()=>{$("accDelGo").disabled=$("accDelIn").value.trim()!=="SUPPRIMER"});
-    $("accDelGo").addEventListener("click",async()=>{const {error}=await SB.rpc("delete_my_account");
+    $("accDelGo").addEventListener("click",async()=>{await disablePush(true);const {error}=await SB.rpc("delete_my_account");
       if(error){accMsg="La suppression a échoué : "+esc(frErr(error));renderAccount();return}
       await SB.auth.signOut();clearLocalProgress();SESSION=null;store.set("hasAccount",false);accMsg="Votre compte a été supprimé.";accMode="signup";gate()});
     return;
@@ -842,6 +845,54 @@ function frErr(e){const m=(e&&e.message||"").toLowerCase();
   return e.message||"Erreur inconnue.";}
 $("sync").addEventListener("click",openAccount);
 $("tabAccount").addEventListener("click",openAccount);
+
+
+/* ---- Notification du matin (Web Push) ----
+   L'appareil s'abonne avec la clé publique ci-dessous ; l'abonnement est rangé dans la table
+   push_subscriptions (Supabase). Chaque matin, GitHub Actions envoie la fiche du jour à tous les abonnés. */
+const VAPID_PUBLIC="BKA47zWA3V_-xXNv_Hl1AP2rB9ybN4CQm_Q1XxOXFQeg69hUfvfHega5QHn5lVZsbR7N3z7Q_ZVFlIShUIevhdM";
+const PUSH_HOUR="7 h 30";
+function b64ToU8(b){const p="=".repeat((4-b.length%4)%4),s=(b+p).replace(/-/g,"+").replace(/_/g,"/"),r=atob(s),a=new Uint8Array(r.length);for(let i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
+const pushSupported=()=>"serviceWorker" in navigator&&"PushManager" in window&&"Notification" in window;
+async function currentSub(){try{const reg=await navigator.serviceWorker.ready;return await reg.pushManager.getSubscription()}catch(e){return null}}
+let pushMsg="";
+async function renderPush(){
+  const box=$("pushCard");if(!box)return;
+  const head=`<span class="label">Notifications</span><p class="rq">Recevoir la fiche du jour chaque matin</p>`;
+  if(!pushSupported()){
+    box.innerHTML=head+`<p class="rev-note">${isIOS&&!standalone()?"Sur iPhone et iPad, installez d'abord UpDate sur l'écran d'accueil (Partager › Sur l'écran d'accueil), puis ouvrez-le depuis son icône pour activer les notifications.":"Ce navigateur ne permet pas les notifications. Essayez avec Chrome, Edge, Firefox ou Safari récent."}</p>`;return}
+  if(Notification.permission==="denied"){
+    box.innerHTML=head+`<p class="rev-note">Les notifications sont bloquées pour UpDate dans les réglages de ce navigateur ou de cet appareil. Autorisez-les, puis revenez ici.</p>`;return}
+  const sub=await currentSub();const on=!!sub&&Notification.permission==="granted";
+  box.innerHTML=head+`<p class="rev-note">${on?"Activées sur cet appareil. Vous recevrez le titre de la fiche du jour vers "+PUSH_HOUR+".":"Une notification vers "+PUSH_HOUR+" avec le titre de la fiche du jour. Le réglage vaut pour cet appareil ; activez-le aussi sur vos autres appareils si vous le souhaitez."}</p>
+    ${pushMsg?`<p class="acc-msg" role="status">${pushMsg}</p>`:""}
+    <div class="rev-act"><button class="${on?"back":"btn"}" type="button" id="pushBtn">${on?"Désactiver sur cet appareil":"Activer les notifications"}</button></div>`;
+  $("pushBtn").addEventListener("click",async()=>{$("pushBtn").disabled=true;pushMsg="";if(on)await disablePush(false);else await enablePush();renderPush()});
+}
+async function enablePush(){
+  if(!SB||!SESSION)return;
+  try{
+    const perm=await Notification.requestPermission();
+    if(perm!=="granted"){pushMsg="Notifications refusées. Vous pourrez les autoriser plus tard dans les réglages du navigateur.";return}
+    const reg=await navigator.serviceWorker.ready;
+    let sub=await reg.pushManager.getSubscription();
+    if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64ToU8(VAPID_PUBLIC)});
+    const j=sub.toJSON();
+    await SB.from("push_subscriptions").delete().eq("endpoint",j.endpoint);
+    const {error}=await SB.from("push_subscriptions").insert({user_id:SESSION.user.id,endpoint:j.endpoint,p256dh:j.keys.p256dh,auth:j.keys.auth});
+    if(error){pushMsg="L'abonnement n'a pas pu être enregistré : "+esc(frErr(error));await sub.unsubscribe().catch(()=>{});return}
+    pushMsg="C'est activé. Prochaine notification demain matin.";
+    try{reg.showNotification("UpDate",{body:"Les notifications sont activées : à demain matin pour la fiche du jour.",icon:"icon-192.png",badge:"favicon-32.png",tag:"update-welcome"})}catch(e){}
+  }catch(e){pushMsg="Activation impossible sur cet appareil : "+esc(e&&e.message||e)}
+}
+async function disablePush(silent){
+  if(!pushSupported())return;
+  const sub=await currentSub();if(!sub)return;
+  const ep=sub.endpoint;
+  try{await sub.unsubscribe()}catch(e){}
+  if(SB&&SESSION){try{await SB.from("push_subscriptions").delete().eq("endpoint",ep)}catch(e){}}
+  if(!silent)pushMsg="Désactivées sur cet appareil.";
+}
 
 /* ---- Mes thèmes : propres à chaque compte ---- */
 const CATS=["Histoire","Sciences","Espace","Animaux","Corps humain","Planète Terre","Art","Inventions","Géographie","Langue","Économie","Portrait","Architecture","Sciences du quotidien"];

@@ -1,6 +1,6 @@
 /* UpDate — service worker : rend l'application installable et utilisable hors ligne.
    Augmentez VERSION à chaque mise à jour de index.html pour forcer le rafraîchissement. */
-const VERSION = "update-v7";
+const VERSION = "update-v8";
 const SHELL = ["./", "index.html", "config.js", "manifest.webmanifest", "fiches.json",
   "icon-192.png", "icon-512.png", "apple-touch-icon.png", "favicon-32.png"];
 
@@ -64,4 +64,28 @@ self.addEventListener("fetch", e => {
   if (/fonts\.(googleapis|gstatic)\.com$/.test(url.hostname) || url.hostname === "cdn.jsdelivr.net") {
     e.respondWith(staleWhileRevalidate(req));
   }
+});
+
+// Notification du matin : affichée même quand l'application est fermée.
+self.addEventListener("push", e => {
+  let d = {};
+  try { d = e.data ? e.data.json() : {}; } catch (err) { d = { body: e.data && e.data.text() }; }
+  const title = d.title || "UpDate";
+  e.waitUntil(self.registration.showNotification(title, {
+    body: d.body || "Votre fiche du jour est prête.",
+    icon: "icon-192.png",
+    badge: "favicon-32.png",
+    tag: d.tag || "update-daily",
+    data: { url: d.url || "./" }
+  }));
+});
+
+// Un appui sur la notification ouvre UpDate (ou ramène la fenêtre déjà ouverte).
+self.addEventListener("notificationclick", e => {
+  e.notification.close();
+  const url = new URL((e.notification.data && e.notification.data.url) || "./", self.registration.scope).href;
+  e.waitUntil(self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(list => {
+    for (const c of list) { if (c.url.startsWith(self.registration.scope) && "focus" in c) { c.navigate(url).catch(() => {}); return c.focus(); } }
+    return self.clients.openWindow(url);
+  }));
 });

@@ -1,0 +1,34 @@
+# UpDate — notification du matin.
+# Tourne à 5 h 15 et 6 h 15 UTC ; le script n'envoie qu'à 7 h heure de Paris (été comme hiver).
+# Pour un essai immédiat : onglet Actions › « Notification du matin » › Run workflow (case « Envoyer maintenant » cochée).
+name: Notification du matin
+
+on:
+  schedule:
+    - cron: "15 5 * * *"
+    - cron: "15 6 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Envoyer maintenant, quelle que soit l'heure"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  envoyer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-save web-push@3.6.7
+      - run: node notify.mjs
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          FORCE_SEND: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}

@@ -251,6 +251,9 @@ button.wk{cursor:pointer}button.wk:hover{border-color:var(--accent)}
 /* compte */
 .acc{max-width:720px;padding-block:32px 20px}
 .acc .rev-h{margin-bottom:20px}
+.gate-intro{margin-bottom:22px}
+.gate-intro h2{font-family:var(--f-display);font-weight:400;font-size:clamp(30px,6vw,46px);line-height:1.1;margin:8px 0 10px;text-wrap:balance}
+.gate-intro .rev-note{font-size:17px;max-width:58ch}
 .acc-switch{display:flex;gap:6px;margin-bottom:12px}
 .acc-switch button{font-family:var(--f-mono);font-size:12px;background:var(--sheet);color:var(--muted);border:1px solid var(--rule);border-radius:999px;padding:8px 14px;cursor:pointer}
 .acc-switch .on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
@@ -296,7 +299,7 @@ button.wk{cursor:pointer}button.wk:hover{border-color:var(--accent)}
 <div class="wrap">
   <header class="top">
     <div class="brand">Up<b>Date</b></div>
-    <div class="stats">
+    <div class="stats" id="hdrStats">
       <button type="button" class="sync" id="sync"><span class="dot-s" aria-hidden="true"></span><span id="syncTxt">Sur cet appareil</span></button>
       <div class="stat"><strong id="sLearn">0</strong><span class="label">fiches apprises</span></div>
       <div class="stat"><strong id="sStreak">1</strong><span class="label">jours de suite</span></div>
@@ -378,7 +381,12 @@ button.wk{cursor:pointer}button.wk:hover{border-color:var(--accent)}
   </section>
 
   <section id="vAccount" class="acc" hidden>
-    <div class="rev-h"><div><span class="label">UpDate</span><h2>Mon compte</h2></div></div>
+    <div class="gate-intro" id="gateIntro" hidden>
+      <span class="label">Bienvenue</span>
+      <h2>Chaque jour, une chose de plus à savoir.</h2>
+      <p class="rev-note">UpDate vous apporte chaque matin une fiche de culture générale : une photo, des explications détaillées, des sources, une lecture audio et un quiz pour retenir. Créez votre compte ou connectez-vous pour commencer.</p>
+    </div>
+    <div class="rev-h" id="accHead"><div><span class="label">UpDate</span><h2>Mon compte</h2></div></div>
     <div id="accBody"></div>
   </section>
 
@@ -614,7 +622,7 @@ function revEnd(){
 }
 $("revBtn").addEventListener("click",()=>openRev("rev"));
 $("revClose").addEventListener("click",closeRev);
-window.addEventListener("hashchange",()=>{if(!FICHES.length)return;const h=location.hash;
+window.addEventListener("hashchange",()=>{if(!FICHES.length||GATED)return;const h=location.hash;
   if(h==="#revision"){if($("vRev").hidden||R&&R.mode==="quiz")openRev("rev")}
   else if(h.startsWith("#quiz-")){const f=BYID[h.slice(6)];if(f&&UNLOCKED.includes(f)&&($("vRev").hidden||!R||R.mode!=="quiz"||QF!==f)){QF=f;openRev("quiz")}}
 });
@@ -724,17 +732,19 @@ function refreshAll(){
 function clearLocalProgress(){SYNC_KEYS.concat(["themes"]).forEach(k=>{try{localStorage.removeItem("update:"+k)}catch(e){}});TH={liked:[],less:[]}}
 
 async function initCloud(){
-  if(!SB){setSync(CFG_ERR?"off":"none");if(CFG_ERR)$("syncTxt").textContent="Comptes mal configurés";return}
+  if(!SB){setSync(CFG_ERR?"off":"none");if(CFG_ERR)$("syncTxt").textContent="Comptes mal configurés";gate();return}
   setSync("local");
   SB.auth.onAuthStateChange((event,session)=>{
     const was=SESSION&&SESSION.user.id;SESSION=session;
-    if(event==="PASSWORD_RECOVERY"){RECOVERY=true;openAccount()}
+    if(event==="PASSWORD_RECOVERY"){RECOVERY=true;if(GATED)ungate();openAccount();return}
     if(session&&session.user.id!==was){pullNow();pullThemes()}
-    if(!session){setSync("local");SY.lastRemote=null}
+    if(session&&(GATED||!STARTED))setTimeout(ungate,0);
+    if(!session){setSync("local");SY.lastRemote=null;if(STARTED&&!GATED)setTimeout(gate,0)}
     if(!$("vAccount").hidden)renderAccount();
   });
-  const {data}=await SB.auth.getSession();
-  if(data.session&&(!SESSION||SESSION.user.id!==data.session.user.id)){SESSION=data.session;pullNow();pullThemes()}
+  let data={session:null};try{({data}=await SB.auth.getSession())}catch(e){}
+  if(data.session){if(!SESSION||SESSION.user.id!==data.session.user.id){SESSION=data.session;pullNow();pullThemes()}ungate()}
+  else if(!SESSION)gate();
   document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&SESSION)pullNow()});
 }
 
@@ -755,9 +765,9 @@ function msgHTML(){return accMsg?`<p class="acc-msg" role="status">${accMsg}</p>
 function renderAccount(){
   const box=$("accBody");
   if(!SB){
-    if(CFG_ERR){box.innerHTML=`<div class="rev-card"><p class="rq">Les comptes sont mal configurés.</p><p class="rev-note">${esc(CFG_ERR)}</p></div>${statsHTML()}`;return}
+    if(CFG_ERR){box.innerHTML=`<div class="rev-card"><p class="rq">Les comptes sont mal configurés.</p><p class="rev-note">${esc(CFG_ERR)}</p></div>`;return}
     box.innerHTML=`<div class="rev-card"><p class="rq">Les comptes ne sont pas encore activés.</p>
-      <p class="rev-note">Votre progression est enregistrée sur cet appareil. Pour créer des comptes par e-mail et synchroniser vos appareils, renseignez les deux valeurs de Supabase dans le fichier <code>config.js</code> (voir le guide d'installation).</p></div>${statsHTML()}`;return}
+      <p class="rev-note">L'accès à UpDate demande un compte. Renseignez les deux valeurs de Supabase dans le fichier <code>config.js</code> (voir le guide d'installation).</p></div>`;return}
   if(RECOVERY&&SESSION){
     box.innerHTML=`<form class="rev-card acc-form" id="accForm"><p class="rq">Choisissez un nouveau mot de passe</p>
       <label for="accPw">Nouveau mot de passe</label><input id="accPw" type="password" autocomplete="new-password" minlength="8" required>
@@ -785,12 +795,12 @@ function renderAccount(){
       </div>`;
     $("accPwBtn").addEventListener("click",async()=>{const {error}=await SB.auth.resetPasswordForEmail(u.email,{redirectTo:APP_URL});
       accMsg=error?"L'e-mail n'a pas pu être envoyé : "+esc(frErr(error)):"Un e-mail vous a été envoyé avec un lien pour choisir un nouveau mot de passe.";renderAccount()});
-    $("accOut").addEventListener("click",async()=>{clearTimeout(SY.timer);await pushNow();await SB.auth.signOut();clearLocalProgress();SESSION=null;accMsg="Vous êtes déconnecté. Votre progression reste enregistrée dans votre compte.";accMode="login";refreshAll();renderAccount()});
+    $("accOut").addEventListener("click",async()=>{clearTimeout(SY.timer);await pushNow();await SB.auth.signOut();clearLocalProgress();SESSION=null;accMsg="Vous êtes déconnecté. Votre progression reste enregistrée dans votre compte.";accMode="login";gate()});
     $("accDel").addEventListener("click",()=>{$("accDelBox").hidden=false;$("accDelIn").focus()});
     $("accDelIn").addEventListener("input",()=>{$("accDelGo").disabled=$("accDelIn").value.trim()!=="SUPPRIMER"});
     $("accDelGo").addEventListener("click",async()=>{const {error}=await SB.rpc("delete_my_account");
       if(error){accMsg="La suppression a échoué : "+esc(frErr(error));renderAccount();return}
-      await SB.auth.signOut();clearLocalProgress();SESSION=null;accMsg="Votre compte a été supprimé.";refreshAll();renderAccount()});
+      await SB.auth.signOut();clearLocalProgress();SESSION=null;store.set("hasAccount",false);accMsg="Votre compte a été supprimé.";accMode="signup";gate()});
     return;
   }
   const isUp=accMode==="signup",isReset=accMode==="reset";
@@ -799,13 +809,13 @@ function renderAccount(){
       <button type="button" class="${isUp?"on":""}" data-m="signup">Créer un compte</button></div>
     <form class="rev-card acc-form" id="accForm" novalidate>
       <p class="rq">${isReset?"Mot de passe oublié":isUp?"Créez votre compte UpDate":"Bon retour !"}</p>
-      <p class="rev-note">${isReset?"Indiquez votre e-mail : vous recevrez un lien pour choisir un nouveau mot de passe.":isUp?"Votre progression actuelle sera rattachée à votre compte. Un e-mail de confirmation vous sera envoyé.":"Connectez-vous pour retrouver votre progression sur tous vos appareils."}</p>
+      <p class="rev-note">${isReset?"Indiquez votre e-mail : vous recevrez un lien pour choisir un nouveau mot de passe.":isUp?"Un e-mail de confirmation vous sera envoyé pour activer votre compte. Votre progression vous suivra ensuite sur tous vos appareils.":"Connectez-vous pour retrouver votre progression sur tous vos appareils."}</p>
       <label for="accEmail">Adresse e-mail</label><input id="accEmail" type="email" autocomplete="email" required>
       ${isReset?"":`<label for="accPw">Mot de passe</label><input id="accPw" type="password" autocomplete="${isUp?"new-password":"current-password"}" minlength="8" required>${isUp?'<p class="rev-note">8 caractères minimum.</p><label for="accPw2">Confirmer le mot de passe</label><input id="accPw2" type="password" autocomplete="new-password" minlength="8" required>':""}`}
       ${msgHTML()}
       <div class="rev-act"><button class="btn" type="submit" id="accGo">${isReset?"Envoyer le lien":isUp?"Créer mon compte":"Se connecter"}</button>
       ${isReset?'<button class="back" type="button" data-m="login">Retour</button>':accMode==="login"?'<button class="linkbtn" type="button" data-m="reset">Mot de passe oublié ?</button>':""}</div>
-    </form>${statsHTML()}`;
+    </form>${GATED?"":statsHTML()}`;
   box.querySelectorAll("[data-m]").forEach(b=>b.addEventListener("click",()=>{const em=$("accEmail")?$("accEmail").value:"";accMode=b.dataset.m;accMsg="";renderAccount();if($("accEmail"))$("accEmail").value=em}));
   $("accForm").addEventListener("submit",async e=>{
     e.preventDefault();const email=$("accEmail").value.trim(),pw=isReset?"":$("accPw").value;
@@ -865,6 +875,7 @@ function closeThemes(){goFiche()}
 $("themeBtn").addEventListener("click",openThemes);
 $("thClose").addEventListener("click",closeThemes);
 window.addEventListener("hashchange",()=>{if(!FICHES.length)return;const h=location.hash;
+  if(GATED){if(h&&h!=="#compte")history.replaceState(null,"",location.pathname+location.search);return}
   if(h==="#themes"){if($("vTheme").hidden)openThemes()}
   else if(h==="#semaine"){if($("vWeek").hidden)openWeek()}
   else if(h==="#compte"){if($("vAccount").hidden)openAccount()}
@@ -898,15 +909,32 @@ function init(data){
   FICHES.forEach(f=>{BYDATE[f.date]=f;BYID[f.id]=f});
   UNLOCKED=FICHES.filter(f=>f.date<=TODAY);
   if(!UNLOCKED.length)UNLOCKED=[FICHES[0]];
-  recordVisit();$("sStreak").textContent=streak();
-  $("loading").hidden=true;$("tabs").hidden=false;showView("fiche");
-  render(TODAY);
-  if(location.hash==="#revision")openRev("rev");
-  if(location.hash.startsWith("#quiz-")){const f=BYID[location.hash.slice(6)];if(f&&UNLOCKED.includes(f))openQuiz(f)}
-  if(location.hash==="#themes")openThemes();
-  if(location.hash==="#semaine")openWeek();
-  if(location.hash==="#compte")openAccount();
-  initCloud();showInstall();if("serviceWorker" in navigator)navigator.serviceWorker.ready.then(precacheWeek).catch(()=>{});
+  initCloud();
+}
+/* Accès réservé aux comptes connectés : sans session, seul l'écran de connexion est visible. */
+let GATED=false,STARTED=false;
+function gate(){
+  GATED=true;aud.pause();
+  $("loading").hidden=true;$("tabs").hidden=true;$("install").hidden=true;$("hdrStats").hidden=true;
+  $("gateIntro").hidden=false;$("accHead").hidden=true;
+  if(location.hash)history.replaceState(null,"",location.pathname+location.search);
+  if(accMode==="login"&&!accMsg&&!store.get("hasAccount",false))accMode="signup";
+  showView("account");renderAccount();
+}
+function ungate(){
+  const wasGated=GATED;GATED=false;
+  $("loading").hidden=true;$("tabs").hidden=false;$("hdrStats").hidden=false;
+  $("gateIntro").hidden=true;$("accHead").hidden=false;store.set("hasAccount",true);
+  if(!STARTED){
+    STARTED=true;const h=location.hash;
+    recordVisit();$("sStreak").textContent=streak();showView("fiche");render(TODAY);
+    if(h==="#revision")openRev("rev");
+    if(h.startsWith("#quiz-")){const f=BYID[h.slice(6)];if(f&&UNLOCKED.includes(f))openQuiz(f)}
+    if(h==="#themes")openThemes();
+    if(h==="#semaine")openWeek();
+    if(h==="#compte")openAccount();
+    showInstall();if("serviceWorker" in navigator)navigator.serviceWorker.ready.then(precacheWeek).catch(()=>{});
+  }else if(wasGated){recordVisit();showView("fiche");render(TODAY);refreshAll()}
 }
 fetch("fiches.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(init)
   .catch(()=>{$("loading").innerHTML='<p class="rq">Impossible de charger les fiches.</p><p class="rev-note">Vérifiez votre connexion, puis rechargez la page.</p>'});

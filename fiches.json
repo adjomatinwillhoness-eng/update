@@ -1,0 +1,2128 @@
+[
+ {
+  "id": "collins",
+  "cat": "Espace",
+  "title": "Eileen Collins, première femme aux commandes d'une navette spatiale",
+  "lede": "En février 1995, l'Américaine Eileen Collins pilote la navette Discovery jusqu'au voisinage de la station russe Mir. Quatre ans plus tard, elle devient la première femme à commander une mission spatiale américaine.",
+  "cap": "Eileen Collins en combinaison orange de vol, portrait NASA.",
+  "cr": "NASA, domaine public",
+  "body": [
+   [
+    "h",
+    "De pilote d'essai à astronaute"
+   ],
+   [
+    "p",
+    "Née en 1956 à Elmira, dans l'État de New York, Eileen Collins rêve de voler depuis l'enfance. Elle entre dans l'US Air Force, devient instructrice de vol puis pilote d'essai, un parcours alors rare pour une femme. La NASA la sélectionne en 1990. À cette époque, plusieurs femmes sont déjà allées dans l'espace, mais toujours comme spécialistes de mission, jamais aux commandes."
+   ],
+   [
+    "h",
+    "1995 : piloter Discovery vers Mir"
+   ],
+   [
+    "p",
+    "En février 1995, lors de la mission STS-63, elle est pilote de la navette Discovery. La mission prépare les futurs amarrages entre navettes américaines et station russe : Discovery s'approche à une dizaine de mètres de Mir, sans s'y accrocher. Pour Collins, c'est un double symbole : une femme aux commandes, et une coopération entre deux anciens adversaires de la guerre froide."
+   ],
+   [
+    "h",
+    "1999 et 2005 : commandante"
+   ],
+   [
+    "p",
+    "En juillet 1999, elle commande la mission STS-93 de la navette Columbia, qui met en orbite le télescope à rayons X Chandra, toujours en service. En 2005, elle commande STS-114, la mission du retour en vol après la perte de Columbia en 2003. Elle y réalise une manœuvre inédite : faire pivoter la navette sur elle-même devant la Station spatiale internationale pour que l'équipage puisse photographier le bouclier thermique et vérifier qu'il n'était pas endommagé."
+   ],
+   [
+    "p",
+    "Au total, elle passe plus de 38 jours dans l'espace en quatre vols, avant de prendre sa retraite en 2006. Pour mémoire, la première femme dans l'espace est la Soviétique Valentina Terechkova, en 1963."
+   ]
+  ],
+  "figs": [
+   [
+    "4",
+    "vols spatiaux"
+   ],
+   [
+    "38 j 8 h",
+    "passés dans l'espace au total"
+   ],
+   [
+    "1999",
+    "première femme commandante d'une navette"
+   ]
+  ],
+  "keep": [
+   "Avant Collins, les femmes astronautes n'étaient jamais aux commandes.",
+   "Sa mission de 1999 a lancé le télescope Chandra.",
+   "Elle a commandé le retour en vol des navettes en 2005."
+  ],
+  "quiz": [
+   {
+    "q": "Quel télescope la mission commandée par Eileen Collins en 1999 a-t-elle mis en orbite ?",
+    "o": [
+     "Hubble",
+     "James Webb",
+     "Chandra"
+    ],
+    "a": 2,
+    "e": "Chandra observe l'Univers en rayons X. Hubble avait été lancé en 1990, et James Webb en 2021."
+   },
+   {
+    "q": "Lors de la mission STS-63 en 1995, que fait la navette Discovery ?",
+    "o": [
+     "Elle s'amarre à l'ISS",
+     "Elle s'approche de la station russe Mir sans s'y amarrer",
+     "Elle répare Hubble"
+    ],
+    "a": 1,
+    "e": "Discovery s'approche à une dizaine de mètres de Mir pour préparer les futurs amarrages entre navettes et station russe."
+   },
+   {
+    "q": "Qui est la première femme à être allée dans l'espace ?",
+    "o": [
+     "Eileen Collins",
+     "Sally Ride",
+     "Valentina Terechkova"
+    ],
+    "a": 2,
+    "e": "La Soviétique Valentina Terechkova, en 1963. Eileen Collins est la première femme pilote puis commandante d'une navette."
+   }
+  ],
+  "src": [
+   [
+    "Eileen Collins (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Eileen_Collins"
+   ],
+   [
+    "STS-63 (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/STS-63"
+   ],
+   [
+    "STS-93 (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/STS-93"
+   ]
+  ],
+  "date": "2026-10-25",
+  "img": "img/collins.jpg",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     5.11,
+     19.38,
+     22.41,
+     46.5,
+     50.62,
+     75.93,
+     79.76,
+     109.5,
+     123.1
+    ],
+    "dur": 135.6
+   },
+   "h": {
+    "starts": [
+     0.0,
+     5.34,
+     20.03,
+     23.2,
+     48.74,
+     53.51,
+     79.31,
+     83.8,
+     116.11,
+     130.86
+    ],
+    "dur": 145.7
+   }
+  }
+ },
+ {
+  "id": "retine",
+  "cat": "Corps humain",
+  "title": "Chacun de vos yeux a un point aveugle, et votre cerveau le cache",
+  "lede": "À l'endroit où le nerf optique quitte l'œil, la rétine n'a aucun capteur de lumière. Vous avez donc un trou dans votre champ de vision, mais votre cerveau le comble si bien que vous ne l'avez sans doute jamais remarqué.",
+  "cap": "Fond d'œil gauche normal : la papille optique (disque clair) et la macula (zone sombre).",
+  "cr": "Mikael Häggström, CC0",
+  "body": [
+   [
+    "h",
+    "Un écran tapissé de capteurs"
+   ],
+   [
+    "p",
+    "La rétine est une fine membrane qui tapisse le fond de l'œil. Elle contient environ 120 millions de bâtonnets, très sensibles à la faible lumière mais aveugles aux couleurs, et environ 6 millions de cônes, qui perçoivent les couleurs grâce à trois types sensibles au bleu, au vert et au rouge. Au centre, une petite zone appelée <em>fovéa</em> ne contient que des cônes très serrés : c'est là que la vision est la plus précise, celle que vous utilisez pour lire ce texte."
+   ],
+   [
+    "h",
+    "Le trou de Mariotte"
+   ],
+   [
+    "p",
+    "Les fibres nerveuses de la rétine se rassemblent en un seul câble, le nerf optique, qui sort de l'œil par la <em>papille</em>. À cet endroit, il n'y a pas de place pour les capteurs : c'est la tache aveugle. Elle a été découverte vers 1660 par le physicien français Edme Mariotte, qui a amusé la cour de Louis XIV en faisant « disparaître » des objets."
+   ],
+   [
+    "p",
+    "Nous ne voyons pas ce trou pour deux raisons. Avec deux yeux, chaque œil couvre la tache aveugle de l'autre. Et même avec un seul œil, le cerveau remplit la zone avec ce qui l'entoure : couleur du fond, motif, lignes. Vous pouvez le vérifier avec le test ci-dessous."
+   ],
+   [
+    "test"
+   ],
+   [
+    "h",
+    "Une image à l'envers"
+   ],
+   [
+    "p",
+    "La cornée et le cristallin projettent sur la rétine une image inversée, la tête en bas, comme dans un appareil photo. C'est le cerveau qui la remet à l'endroit. Fait étonnant : la rétine n'est pas seulement un capteur. Pendant le développement de l'embryon, elle se forme à partir du cerveau lui-même. Les médecins la considèrent comme une partie du système nerveux central, la seule que l'on peut observer directement, à travers la pupille."
+   ]
+  ],
+  "figs": [
+   [
+    "120 M",
+    "bâtonnets, pour la vision en faible lumière"
+   ],
+   [
+    "6 M",
+    "cônes, pour les couleurs et les détails"
+   ],
+   [
+    "~1660",
+    "découverte de la tache aveugle par Mariotte"
+   ]
+  ],
+  "keep": [
+   "La tache aveugle correspond à la sortie du nerf optique.",
+   "Le cerveau comble le trou avec ce qui l'entoure.",
+   "La rétine fait partie du système nerveux central."
+  ],
+  "quiz": [
+   {
+    "q": "Pourquoi ne voit-on pas sa tache aveugle au quotidien ?",
+    "o": [
+     "Parce qu'elle n'existe que chez les personnes myopes",
+     "Parce que l'autre œil la couvre et que le cerveau comble le vide",
+     "Parce qu'elle se déplace en permanence"
+    ],
+    "a": 1,
+    "e": "Les deux yeux ont leur tache aveugle à des endroits différents du champ visuel, et le cerveau complète l'image avec les détails voisins."
+   },
+   {
+    "q": "Quelles cellules de la rétine permettent de voir les couleurs ?",
+    "o": [
+     "Les bâtonnets",
+     "Les cônes",
+     "Les fibres du nerf optique"
+    ],
+    "a": 1,
+    "e": "Les cônes, environ 6 millions, existent en trois types sensibles au bleu, au vert et au rouge. Les bâtonnets servent à voir en faible lumière."
+   },
+   {
+    "q": "Qui a découvert la tache aveugle vers 1660 ?",
+    "o": [
+     "Edme Mariotte",
+     "Isaac Newton",
+     "Louis Pasteur"
+    ],
+    "a": 0,
+    "e": "Le physicien français Edme Mariotte, qui s'amusait à faire disparaître des objets devant la cour de Louis XIV."
+   }
+  ],
+  "src": [
+   [
+    "Rétine (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/R%C3%A9tine"
+   ],
+   [
+    "Tache aveugle (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Tache_aveugle"
+   ],
+   [
+    "Edme Mariotte (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Edme_Mariotte"
+   ]
+  ],
+  "date": "2026-10-26",
+  "img": "img/retine.jpg",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     4.58,
+     16.71,
+     19.49,
+     45.35,
+     47.42,
+     67.79,
+     83.57,
+     85.77,
+     110.95
+    ],
+    "dur": 122.0
+   },
+   "h": {
+    "starts": [
+     0.0,
+     4.64,
+     18.04,
+     20.97,
+     47.4,
+     49.57,
+     71.74,
+     89.85,
+     92.47,
+     120.49
+    ],
+    "dur": 133.1
+   }
+  },
+  "test": "blindspot"
+ },
+ {
+  "id": "pieces",
+  "cat": "Histoire",
+  "title": "Les premières pièces de monnaie ont été frappées en Lydie, il y a 2 600 ans",
+  "lede": "Avant les pièces, on payait avec du métal pesé sur une balance. Vers la fin du VIIe siècle avant notre ère, le royaume de Lydie, dans l'actuelle Turquie, a eu l'idée de frapper des morceaux de métal d'un poids garanti.",
+  "cap": "Pièces grecques retrouvées à Pompéi, ville ensevelie par le Vésuve en 79.",
+  "cr": "Brooklyn Museum, sans restriction connue",
+  "body": [
+   [
+    "h",
+    "Avant la pièce : peser le métal"
+   ],
+   [
+    "p",
+    "En Mésopotamie, des milliers d'années avant les premières pièces, on paye déjà avec de l'argent, mais sous forme de morceaux, d'anneaux ou de lingots que l'on pèse à chaque transaction. Le sicle, ou shekel, est d'abord une unité de poids. Le problème est évident : il faut une balance, et vérifier que le métal n'est pas mélangé."
+   ],
+   [
+    "h",
+    "L'invention lydienne"
+   ],
+   [
+    "p",
+    "La Lydie, royaume de l'ouest de l'Anatolie, possède une ressource rare : l'électrum, un alliage naturel d'or et d'argent charrié par la rivière Pactole. Vers la fin du VIIe siècle avant notre ère, les Lydiens découpent ce métal en petits morceaux de poids fixe et y frappent une marque, souvent une tête de lion. La marque garantit le poids et la valeur : plus besoin de peser. C'est la naissance de la pièce de monnaie."
+   ],
+   [
+    "p",
+    "Le roi Crésus, au VIe siècle avant notre ère, va plus loin en séparant l'or et l'argent pour frapper des pièces de métal pur. Sa richesse est restée proverbiale : on dit encore « riche comme Crésus »."
+   ],
+   [
+    "h",
+    "Les Grecs diffusent l'idée"
+   ],
+   [
+    "p",
+    "Les cités grecques adoptent très vite le système. Égine frappe des pièces ornées d'une tortue, Athènes des tétradrachmes d'argent portant la chouette d'Athéna. Ces chouettes ont circulé dans toute la Méditerranée. Vous en avez peut-être une dans votre porte-monnaie : la pièce grecque de 1 euro reprend ce motif de la chouette athénienne."
+   ],
+   [
+    "p",
+    "En Chine, une invention indépendante a eu lieu à peu près à la même époque, avec des monnaies de bronze en forme de bêche ou de couteau, puis des pièces rondes percées d'un trou carré."
+   ]
+  ],
+  "figs": [
+   [
+    "~VIIe s. av. J.-C.",
+    "premières pièces en Lydie"
+   ],
+   [
+    "2",
+    "métaux dans l'électrum : or et argent"
+   ],
+   [
+    "1 €",
+    "la pièce grecque reprend la chouette d'Athènes"
+   ]
+  ],
+  "keep": [
+   "Une pièce est un morceau de métal dont le poids est garanti par une marque.",
+   "Les premières pièces étaient en électrum, en Lydie.",
+   "L'expression « riche comme Crésus » vient d'un roi lydien."
+  ],
+  "quiz": [
+   {
+    "q": "De quel métal étaient faites les premières pièces lydiennes ?",
+    "o": [
+     "Du bronze",
+     "De l'électrum, un alliage naturel d'or et d'argent",
+     "Du cuivre pur"
+    ],
+    "a": 1,
+    "e": "L'électrum était charrié par la rivière Pactole. Crésus a ensuite séparé l'or et l'argent."
+   },
+   {
+    "q": "D'où vient l'expression « riche comme Crésus » ?",
+    "o": [
+     "D'un roi de Lydie",
+     "D'un marchand romain",
+     "D'un pharaon égyptien"
+    ],
+    "a": 0,
+    "e": "Crésus, roi de Lydie au VIe siècle avant notre ère, a frappé des pièces d'or et d'argent pur. Sa richesse est devenue proverbiale."
+   },
+   {
+    "q": "Quel animal figure sur la pièce grecque de 1 euro, en souvenir des pièces d'Athènes ?",
+    "o": [
+     "Une tortue",
+     "Un lion",
+     "Une chouette"
+    ],
+    "a": 2,
+    "e": "La chouette d'Athéna ornait les tétradrachmes d'argent d'Athènes. La tortue était le symbole d'Égine, le lion celui de la Lydie."
+   }
+  ],
+  "src": [
+   [
+    "Lydie (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Lydie"
+   ],
+   [
+    "Électrum (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/%C3%89lectrum"
+   ],
+   [
+    "Crésus (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Cr%C3%A9sus"
+   ]
+  ],
+  "date": "2026-10-27",
+  "img": "img/pieces.jpg",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     5.55,
+     19.0,
+     22.01,
+     41.32,
+     43.55,
+     68.82,
+     80.89,
+     83.23,
+     102.14,
+     111.81
+    ],
+    "dur": 124.4
+   },
+   "h": {
+    "starts": [
+     0.0,
+     6.24,
+     20.61,
+     23.67,
+     44.13,
+     46.76,
+     73.85,
+     87.22,
+     90.05,
+     111.13,
+     122.17
+    ],
+    "dur": 135.7
+   }
+  }
+ },
+ {
+  "id": "dscovr",
+  "cat": "Espace",
+  "title": "Un satellite photographie la Terre entière chaque jour depuis 1,5 million de km",
+  "lede": "Le satellite DSCOVR, lancé en 2015, est placé entre la Terre et le Soleil, en un point où les attractions s'équilibrent. Il voit en permanence la face éclairée de notre planète et surveille les tempêtes solaires.",
+  "cap": "Lancement de DSCOVR sur une fusée Falcon 9, Cap Canaveral, février 2015.",
+  "cr": "SpaceX, domaine public",
+  "body": [
+   [
+    "h",
+    "Un satellite né d'une idée politique"
+   ],
+   [
+    "p",
+    "En 1998, le vice-président américain Al Gore propose une mission baptisée Triana : un satellite qui diffuserait en continu une image de la Terre entière, pour sensibiliser le public à l'environnement. Le satellite est construit, puis rangé dans un entrepôt en 2001 après un changement de priorités politiques. Il y reste près de dix ans, jusqu'à ce qu'on le rénove pour une nouvelle mission, la météo spatiale, sous le nom de DSCOVR (Deep Space Climate Observatory). Il est lancé le 11 février 2015."
+   ],
+   [
+    "h",
+    "Garé au point de Lagrange L1"
+   ],
+   [
+    "p",
+    "Entre la Terre et le Soleil, il existe un point où l'attraction des deux astres et le mouvement en orbite s'équilibrent : un objet placé là tourne autour du Soleil au même rythme que la Terre et reste aligné entre les deux. C'est le point de Lagrange L1, à environ 1,5 million de km de la Terre, soit quatre fois la distance Terre-Lune et seulement 1 % de la distance Terre-Soleil."
+   ],
+   [
+    "p",
+    "Ces points d'équilibre ont été calculés au XVIIIe siècle par Leonhard Euler, qui en a trouvé trois, puis par Joseph-Louis Lagrange en 1772, qui a complété la liste à cinq. Le télescope James Webb, lui, est placé au point L2, de l'autre côté de la Terre."
+   ],
+   [
+    "h",
+    "Deux missions en une"
+   ],
+   [
+    "p",
+    "Depuis L1, la caméra EPIC de DSCOVR voit toujours la face éclairée de la Terre. Elle prend chaque jour plusieurs photos du globe entier, publiées en ligne par la NASA : on y suit les nuages, les éclipses et la rotation de la planète. Surtout, DSCOVR mesure le vent solaire avant qu'il n'atteigne la Terre. Cela donne environ 15 à 60 minutes d'avance pour prévenir les opérateurs de satellites et de réseaux électriques en cas de tempête magnétique."
+   ]
+  ],
+  "figs": [
+   [
+    "1,5 M km",
+    "distance entre DSCOVR et la Terre"
+   ],
+   [
+    "5",
+    "points de Lagrange dans le système Terre-Soleil"
+   ],
+   [
+    "15 à 60 min",
+    "d'avance pour alerter d'une tempête solaire"
+   ]
+  ],
+  "keep": [
+   "Un point de Lagrange est un point d'équilibre entre deux astres.",
+   "DSCOVR voit en permanence la face éclairée de la Terre.",
+   "Il sert surtout d'alerte avancée contre les tempêtes solaires."
+  ],
+  "quiz": [
+   {
+    "q": "Où se trouve le point de Lagrange L1 du système Terre-Soleil ?",
+    "o": [
+     "Entre la Terre et le Soleil",
+     "Derrière la Lune",
+     "De l'autre côté du Soleil"
+    ],
+    "a": 0,
+    "e": "L1 se trouve entre la Terre et le Soleil, à environ 1,5 million de km de nous. L2 est de l'autre côté de la Terre, là où se trouve le télescope James Webb."
+   },
+   {
+    "q": "À quelle distance de la Terre se trouve DSCOVR ?",
+    "o": [
+     "Environ 36 000 km",
+     "Environ 384 000 km",
+     "Environ 1,5 million de km"
+    ],
+    "a": 2,
+    "e": "Environ 1,5 million de km, soit quatre fois la distance Terre-Lune. Les 36 000 km correspondent à l'orbite des satellites géostationnaires."
+   },
+   {
+    "q": "Combien de temps d'avance DSCOVR donne-t-il pour prévenir d'une tempête solaire ?",
+    "o": [
+     "Quelques secondes",
+     "Environ 15 à 60 minutes",
+     "Environ une semaine"
+    ],
+    "a": 1,
+    "e": "Il mesure le vent solaire avant qu'il n'atteigne la Terre, ce qui laisse environ 15 à 60 minutes pour alerter."
+   }
+  ],
+  "src": [
+   [
+    "DSCOVR (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Deep_Space_Climate_Observatory"
+   ],
+   [
+    "Point de Lagrange (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Point_de_Lagrange"
+   ],
+   [
+    "Images quotidiennes de la caméra EPIC (NASA)",
+    "https://epic.gsfc.nasa.gov/"
+   ]
+  ],
+  "date": "2026-10-28",
+  "img": "img/dscovr.jpg",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     5.94,
+     19.64,
+     22.5,
+     53.67,
+     56.39,
+     79.7,
+     96.53,
+     98.67,
+     125.41
+    ],
+    "dur": 138.1
+   },
+   "h": {
+    "starts": [
+     0.0,
+     6.71,
+     21.41,
+     24.43,
+     56.97,
+     59.91,
+     83.68,
+     102.26,
+     104.42,
+     132.55
+    ],
+    "dur": 146.9
+   }
+  }
+ },
+ {
+  "id": "cafe",
+  "cat": "Sciences du quotidien",
+  "title": "Le café ne vous donne pas d'énergie : il bloque le signal de la fatigue",
+  "lede": "La caféine ne recharge rien. Elle prend la place d'une molécule, l'adénosine, qui s'accumule dans le cerveau au fil de la journée et signale qu'il est temps de dormir.",
+  "cap": "Une tasse de café au lait.",
+  "cr": "Rachel Michetti, CC0",
+  "body": [
+   [
+    "h",
+    "L'adénosine, le sablier du sommeil"
+   ],
+   [
+    "p",
+    "Quand vos neurones travaillent, ils consomment de l'énergie, et ce processus produit une molécule appelée adénosine. Elle s'accumule dans le cerveau pendant toute la période d'éveil. En se fixant sur des récepteurs dédiés, elle ralentit l'activité de certains neurones et fait monter la sensation de fatigue. Le sommeil permet ensuite d'éliminer ce stock."
+   ],
+   [
+    "h",
+    "Un leurre moléculaire"
+   ],
+   [
+    "p",
+    "La caféine a une forme assez proche de l'adénosine pour se fixer sur les mêmes récepteurs, mais sans les activer. Elle bloque la serrure sans ouvrir la porte. Le signal de fatigue ne passe plus, et vous vous sentez plus alerte. Mais l'adénosine continue de s'accumuler : quand la caféine est éliminée, la fatigue revient d'un coup. Chez un adulte, il faut en moyenne environ 5 heures pour éliminer la moitié de la caféine absorbée, avec de fortes différences d'une personne à l'autre."
+   ],
+   [
+    "p",
+    "L'Autorité européenne de sécurité des aliments (EFSA) estime que jusqu'à 400 mg de caféine par jour ne pose pas de problème de sécurité pour un adulte en bonne santé, soit environ quatre tasses de café filtre. Une tasse contient environ 60 à 100 mg selon la préparation."
+   ],
+   [
+    "h",
+    "Du Yémen à Paris"
+   ],
+   [
+    "p",
+    "La légende raconte qu'un berger éthiopien, Kaldi, aurait remarqué l'agitation de ses chèvres après qu'elles ont mangé des baies de caféier. Mais ce récit n'apparaît par écrit qu'en 1671. Les premières traces fiables de consommation datent du XVe siècle, dans des monastères soufis du Yémen, où la boisson aidait à prier la nuit. Le port de Moka exportait les grains, d'où le nom du café moka."
+   ],
+   [
+    "p",
+    "Le mot vient de l'arabe <em>qahwa</em>, devenu <em>kahve</em> en turc puis <em>caffè</em> en italien. À Paris, le Procope ouvre en 1686 et revendique le titre de plus ancien café de la ville encore en activité."
+   ]
+  ],
+  "figs": [
+   [
+    "~5 h",
+    "pour éliminer la moitié de la caféine"
+   ],
+   [
+    "400 mg",
+    "par jour, seuil jugé sans risque pour un adulte (EFSA)"
+   ],
+   [
+    "1686",
+    "ouverture du Procope à Paris"
+   ]
+  ],
+  "keep": [
+   "La caféine bloque les récepteurs de l'adénosine.",
+   "La fatigue ne disparaît pas, elle est masquée.",
+   "Le café est consommé au Yémen depuis le XVe siècle."
+  ],
+  "quiz": [
+   {
+    "q": "Comment la caféine agit-elle sur la fatigue ?",
+    "o": [
+     "Elle fournit du sucre au cerveau",
+     "Elle détruit l'adénosine",
+     "Elle occupe les récepteurs de l'adénosine sans les activer"
+    ],
+    "a": 2,
+    "e": "La caféine prend la place de l'adénosine sur ses récepteurs. Le signal de fatigue est bloqué, mais l'adénosine continue de s'accumuler."
+   },
+   {
+    "q": "Quelle molécule, accumulée pendant l'éveil, signale au cerveau qu'il est temps de dormir ?",
+    "o": [
+     "La dopamine",
+     "L'adénosine",
+     "L'adrénaline"
+    ],
+    "a": 1,
+    "e": "L'adénosine s'accumule tout au long de la journée. La caféine bloque ses récepteurs."
+   },
+   {
+    "q": "Où trouve-t-on les premières traces fiables de consommation de café ?",
+    "o": [
+     "Dans des monastères soufis du Yémen, au XVe siècle",
+     "À Paris, au XVIIe siècle",
+     "En Grèce antique"
+    ],
+    "a": 0,
+    "e": "La légende du berger Kaldi n'est écrite qu'en 1671. Les premières traces fiables viennent du Yémen au XVe siècle."
+   }
+  ],
+  "src": [
+   [
+    "Caféine (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Caf%C3%A9ine"
+   ],
+   [
+    "Café (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Caf%C3%A9"
+   ],
+   [
+    "La caféine, dossier de l'EFSA",
+    "https://www.efsa.europa.eu/fr/topics/topic/caffeine"
+   ]
+  ],
+  "date": "2026-10-29",
+  "img": "img/cafe.jpg",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     4.91,
+     15.41,
+     18.9,
+     39.07,
+     41.18,
+     70.04,
+     87.67,
+     89.82,
+     113.15,
+     125.14
+    ],
+    "dur": 136.4
+   },
+   "h": {
+    "starts": [
+     0.0,
+     5.49,
+     16.61,
+     20.36,
+     42.54,
+     45.29,
+     75.79,
+     94.2,
+     96.61,
+     121.49,
+     135.07
+    ],
+    "dur": 147.6
+   }
+  }
+ },
+ {
+  "id": "chat",
+  "cat": "Animaux",
+  "title": "Le chat s'est domestiqué presque tout seul, attiré par les souris des premiers paysans",
+  "lede": "Contrairement au chien, le chat n'a pas été dressé pour travailler. Il s'est installé de lui-même près des villages du Néolithique, où les réserves de grain attiraient les rongeurs.",
+  "cap": "Chelsea, un chat tigré.",
+  "cr": "Stefan van der Walt, CC0",
+  "body": [
+   [
+    "h",
+    "Un ancêtre venu du Proche-Orient"
+   ],
+   [
+    "p",
+    "Tous les chats domestiques descendent d'une même espèce sauvage : le chat sauvage d'Afrique du Nord et du Proche-Orient, <em>Felis lybica</em>. Il y a environ 10 000 ans, au Croissant fertile, les humains commencent à cultiver des céréales et à les stocker. Ces greniers attirent les souris, et les souris attirent les chats. Les plus tolérants envers les humains profitent de ce garde-manger : la domestication commence par un intérêt mutuel."
+   ],
+   [
+    "h",
+    "Une tombe à Chypre"
+   ],
+   [
+    "p",
+    "En 2004, des archéologues publient une découverte faite à Shillourokambos, à Chypre : un chat enterré à côté d'un humain, il y a environ 9 500 ans. Or il n'existe pas de chat sauvage naturellement présent sur l'île. Cet animal a donc été transporté en bateau par des humains, preuve d'un lien déjà étroit."
+   ],
+   [
+    "p",
+    "Plus tard, l'Égypte ancienne fait du chat un animal sacré, associé à la déesse Bastet. Des centaines de milliers de chats y ont été momifiés. Une étude génétique publiée en 2017 a montré que les chats domestiques se sont répandus en deux grandes vagues, l'une depuis le Proche-Orient, l'autre depuis l'Égypte, souvent à bord des navires où ils chassaient les rats."
+   ],
+   [
+    "h",
+    "Un animal resté à moitié sauvage"
+   ],
+   [
+    "p",
+    "Génétiquement, le chat domestique a très peu changé par rapport à son ancêtre sauvage, bien moins que le chien par rapport au loup. Il peut encore survivre seul, chasser et se reproduire sans l'aide de l'humain. Le pelage tigré à motifs marbrés, très courant aujourd'hui, est apparu tard : la même étude de 2017 le fait remonter au Moyen Âge."
+   ]
+  ],
+  "figs": [
+   [
+    "~10 000 ans",
+    "début de la cohabitation au Proche-Orient"
+   ],
+   [
+    "9 500 ans",
+    "âge de la tombe de Shillourokambos"
+   ],
+   [
+    "2",
+    "grandes vagues de diffusion"
+   ]
+  ],
+  "keep": [
+   "Le chat s'est rapproché de l'humain pour chasser les rongeurs.",
+   "La plus ancienne preuve vient de Chypre, il y a 9 500 ans.",
+   "Il a gardé presque tout le génome de son ancêtre sauvage."
+  ],
+  "quiz": [
+   {
+    "q": "Pourquoi la tombe de Chypre prouve-t-elle un lien entre humains et chats ?",
+    "o": [
+     "Parce que le chat portait un collier",
+     "Parce qu'il n'y avait pas de chats sauvages sur l'île : il a été amené par bateau",
+     "Parce que la tombe était en Égypte"
+    ],
+    "a": 1,
+    "e": "Chypre n'a pas de chat sauvage originel. Ce chat a donc été transporté volontairement par des humains."
+   },
+   {
+    "q": "De quelle espèce sauvage descendent tous les chats domestiques ?",
+    "o": [
+     "Le lynx",
+     "Le chat sauvage d'Afrique du Nord et du Proche-Orient",
+     "Le chat sauvage européen"
+    ],
+    "a": 1,
+    "e": "Felis lybica, le chat sauvage d'Afrique du Nord et du Proche-Orient."
+   },
+   {
+    "q": "Qu'est-ce qui a attiré les chats près des premiers villages ?",
+    "o": [
+     "Les restes de viande",
+     "Les rongeurs attirés par les réserves de grain",
+     "La chaleur des foyers"
+    ],
+    "a": 1,
+    "e": "Les greniers des premiers paysans attiraient les souris, et les souris attiraient les chats."
+   }
+  ],
+  "src": [
+   [
+    "Chat domestique (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Chat_domestique"
+   ],
+   [
+    "Shillourokambos (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Shillourokambos"
+   ],
+   [
+    "Felis lybica (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Felis_lybica"
+   ]
+  ],
+  "date": "2026-10-30",
+  "img": "img/chat.jpg",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     5.62,
+     15.96,
+     18.63,
+     42.89,
+     45.09,
+     63.94,
+     83.72,
+     86.87,
+     107.35
+    ],
+    "dur": 120.4
+   },
+   "h": {
+    "starts": [
+     0.0,
+     6.07,
+     17.66,
+     20.7,
+     46.47,
+     48.53,
+     68.41,
+     90.49,
+     94.24,
+     116.21
+    ],
+    "dur": 130.2
+   }
+  }
+ },
+ {
+  "id": "xdf",
+  "cat": "Astronomie",
+  "title": "Une photo de Hubble montre 5 500 galaxies dans un minuscule coin de ciel",
+  "lede": "En 2012, la NASA et l'ESA ont publié le Hubble eXtreme Deep Field : l'image la plus profonde jamais prise du ciel en lumière visible. En la regardant, on remonte le temps de plus de 13 milliards d'années.",
+  "cap": "Le Hubble eXtreme Deep Field (XDF), dans la constellation du Fourneau.",
+  "cr": "NASA / ESA, domaine public",
+  "body": [
+   [
+    "h",
+    "Un pari risqué en 1995"
+   ],
+   [
+    "p",
+    "Tout commence en décembre 1995. Robert Williams, directeur du Space Telescope Science Institute, décide d'utiliser son temps d'observation personnel pour pointer Hubble pendant dix jours vers une zone de la Grande Ourse qui semblait vide. Plusieurs collègues craignent un gaspillage : à quoi bon photographier du noir ? Le résultat, le <em>Hubble Deep Field</em>, révèle environ 3 000 galaxies là où l'œil ne voyait rien."
+   ],
+   [
+    "h",
+    "Dix ans de pose sur un seul point"
+   ],
+   [
+    "p",
+    "Le XDF, publié le 25 septembre 2012, pousse l'idée beaucoup plus loin. Les astronomes ont combiné les images prises au même endroit pendant dix ans, de 2002 à 2012, soit environ deux millions de secondes d'exposition cumulée (plus de 23 jours). En additionnant autant de lumière, des objets des milliards de fois plus faibles que ce que perçoit l'œil humain deviennent visibles. On y compte environ 5 500 galaxies."
+   ],
+   [
+    "p",
+    "La zone photographiée est minuscule : environ un dixième du diamètre apparent de la pleine Lune. Si une si petite fenêtre contient des milliers de galaxies, on comprend pourquoi les astronomes estiment que l'Univers observable en contient des centaines de milliards."
+   ],
+   [
+    "h",
+    "Regarder loin, c'est regarder le passé"
+   ],
+   [
+    "p",
+    "La lumière voyage à environ 300 000 km par seconde. C'est très rapide, mais l'Univers est immense : la lumière des galaxies les plus lointaines de l'image a voyagé pendant environ 13,2 milliards d'années avant d'atteindre Hubble. On ne voit donc pas ces galaxies telles qu'elles sont aujourd'hui, mais telles qu'elles étaient quelques centaines de millions d'années après le Big Bang, qui date d'environ 13,8 milliards d'années."
+   ],
+   [
+    "p",
+    "Les petites taches rougeâtres sont souvent les plus lointaines. L'expansion de l'Univers étire la lumière pendant son voyage et la décale vers le rouge, un phénomène appelé <em>décalage vers le rouge</em>. C'est pour cette raison que le télescope James Webb, lancé en 2021, observe surtout en infrarouge : il capte cette lumière très étirée et voit encore plus loin."
+   ]
+  ],
+  "figs": [
+   [
+    "5 500",
+    "galaxies environ visibles sur l'image"
+   ],
+   [
+    "2 000 000 s",
+    "d'exposition cumulée, sur 10 ans"
+   ],
+   [
+    "13,2 Ga",
+    "âge de la lumière des galaxies les plus lointaines"
+   ]
+  ],
+  "keep": [
+   "Plus un objet est loin, plus sa lumière est ancienne.",
+   "Une zone de ciel qui semble vide contient des milliers de galaxies.",
+   "L'expansion de l'Univers rougit la lumière lointaine."
+  ],
+  "quiz": [
+   {
+    "q": "Pourquoi voir une galaxie très lointaine revient-il à voir le passé ?",
+    "o": [
+     "Parce que les galaxies lointaines sont plus vieilles que la nôtre",
+     "Parce que sa lumière a mis des milliards d'années à nous parvenir",
+     "Parce que Hubble enregistre des images anciennes"
+    ],
+    "a": 1,
+    "e": "La lumière a une vitesse finie. On reçoit aujourd'hui une lumière partie il y a des milliards d'années : on voit la galaxie telle qu'elle était à ce moment-là."
+   },
+   {
+    "q": "Combien de galaxies environ compte-t-on sur le Hubble eXtreme Deep Field ?",
+    "o": [
+     "Environ 50",
+     "Environ 5 500",
+     "Environ 5 millions"
+    ],
+    "a": 1,
+    "e": "Environ 5 500 galaxies, dans une zone qui fait à peu près un dixième du diamètre apparent de la pleine Lune."
+   },
+   {
+    "q": "Pourquoi les galaxies les plus lointaines paraissent-elles rougeâtres ?",
+    "o": [
+     "Elles sont composées d'étoiles rouges uniquement",
+     "L'expansion de l'Univers étire leur lumière vers le rouge",
+     "La poussière de notre atmosphère les colore"
+    ],
+    "a": 1,
+    "e": "C'est le décalage vers le rouge : pendant le voyage, l'expansion de l'Univers étire les ondes lumineuses."
+   }
+  ],
+  "src": [
+   [
+    "Hubble eXtreme Deep Field (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Hubble_eXtreme_Deep_Field"
+   ],
+   [
+    "Hubble Deep Field (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Hubble_Deep_Field"
+   ],
+   [
+    "Communiqué ESA/Hubble heic1214",
+    "https://esahubble.org/news/heic1214/"
+   ]
+  ],
+  "date": "2026-10-31",
+  "img": "img/xdf.jpg",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     6.66,
+     19.95,
+     23.59,
+     49.29,
+     51.88,
+     77.62,
+     92.6,
+     95.9,
+     119.29,
+     140.43
+    ],
+    "dur": 152.5
+   },
+   "h": {
+    "starts": [
+     0.0,
+     6.14,
+     20.97,
+     24.77,
+     53.49,
+     56.85,
+     84.46,
+     101.0,
+     104.32,
+     129.89,
+     152.83
+    ],
+    "dur": 166.1
+   }
+  }
+ },
+ {
+  "id": "hopper",
+  "cat": "Informatique",
+  "title": "Le premier « bug » informatique était un vrai insecte",
+  "lede": "Le 9 septembre 1947, l'équipe de Grace Hopper trouve un papillon de nuit coincé dans un ordinateur de Harvard. L'insecte, collé dans le cahier de bord, est devenu le symbole de toutes les pannes logicielles.",
+  "cap": "Grace Hopper, pionnière de l'informatique et contre-amiral de l'US Navy.",
+  "cr": "Portrait officiel US Navy, domaine public",
+  "body": [
+   [
+    "h",
+    "Une mathématicienne dans la Marine"
+   ],
+   [
+    "p",
+    "Grace Hopper naît à New York en 1906. Docteure en mathématiques de l'université Yale en 1934, elle s'engage dans la réserve de l'US Navy en 1943, pendant la Seconde Guerre mondiale. La Marine l'affecte à Harvard, où elle programme le Mark I, l'un des premiers grands calculateurs électromécaniques : une machine de plus de 15 mètres de long, faite de relais et d'engrenages."
+   ],
+   [
+    "h",
+    "Le papillon du relais 70"
+   ],
+   [
+    "p",
+    "En septembre 1947, le Mark II, successeur du Mark I, tombe en panne. Les opérateurs ouvrent la machine et découvrent un papillon de nuit (une mite) coincé dans un relais du panneau F. Ils le retirent avec une pince et le collent dans le cahier de bord avec une note amusée : premier cas réel de « bug » trouvé. Ce cahier est aujourd'hui conservé au Musée national d'histoire américaine, à Washington."
+   ],
+   [
+    "p",
+    "Détail important : le mot <em>bug</em> existait déjà. Au XIXe siècle, Thomas Edison l'utilisait pour parler des défauts de ses inventions. Si l'équipe a trouvé la note drôle, c'est justement parce que le jargon devenait littéral. Grace Hopper a ensuite raconté cette histoire si souvent qu'elle est restée associée à son nom."
+   ],
+   [
+    "h",
+    "Faire parler les machines en anglais"
+   ],
+   [
+    "p",
+    "Son apport le plus important est ailleurs. En 1952, elle crée l'un des premiers compilateurs, le A-0 : un programme qui traduit des instructions écrites par un humain en code machine. Beaucoup pensaient alors qu'un ordinateur ne pouvait comprendre que des chiffres. Elle défend l'idée qu'on doit pouvoir programmer avec des mots proches de l'anglais. Ce travail mène en 1959 au COBOL, un langage encore utilisé aujourd'hui dans les banques et les administrations."
+   ],
+   [
+    "p",
+    "Pour expliquer ce qu'est une nanoseconde, elle distribuait des fils de 30 cm environ : la distance que parcourt la lumière en un milliardième de seconde. Elle quitte la Marine en 1986, à 79 ans, avec le grade de contre-amiral."
+   ]
+  ],
+  "figs": [
+   [
+    "1947",
+    "le papillon est trouvé dans le Mark II"
+   ],
+   [
+    "1952",
+    "premier compilateur, le A-0"
+   ],
+   [
+    "30 cm",
+    "distance parcourue par la lumière en 1 nanoseconde"
+   ]
+  ],
+  "keep": [
+   "Le mot bug existait avant 1947 ; l'insecte l'a rendu célèbre.",
+   "Grace Hopper a inventé l'un des premiers compilateurs.",
+   "Elle a inspiré le COBOL, encore utilisé aujourd'hui."
+  ],
+  "quiz": [
+   {
+    "q": "Qu'est-ce qu'un compilateur, l'invention majeure de Grace Hopper ?",
+    "o": [
+     "Un programme qui traduit un langage lisible par l'humain en code machine",
+     "Un appareil qui détecte les insectes dans les ordinateurs",
+     "Une mémoire qui stocke les programmes"
+    ],
+    "a": 0,
+    "e": "Le compilateur traduit des instructions proches du langage humain en instructions que la machine exécute. C'est la base de presque toute la programmation moderne."
+   },
+   {
+    "q": "Le mot « bug » a-t-il été inventé en 1947 avec le papillon du Mark II ?",
+    "o": [
+     "Oui, c'est l'origine du mot",
+     "Non, Edison l'utilisait déjà au XIXe siècle",
+     "Non, il vient du français « bogue »"
+    ],
+    "a": 1,
+    "e": "Le mot existait déjà dans le jargon des ingénieurs. L'insecte a rendu l'histoire célèbre parce que le jargon devenait littéral."
+   },
+   {
+    "q": "Quel langage de programmation, encore utilisé dans les banques, est issu des travaux de Grace Hopper ?",
+    "o": [
+     "COBOL",
+     "Python",
+     "Fortran"
+    ],
+    "a": 0,
+    "e": "Le COBOL, créé en 1959, s'inspire du FLOW-MATIC de Grace Hopper. Il fait encore tourner de nombreux systèmes bancaires et administratifs."
+   }
+  ],
+  "src": [
+   [
+    "Grace Hopper (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Grace_Hopper"
+   ],
+   [
+    "Bug (informatique) (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Bug_(informatique)"
+   ],
+   [
+    "COBOL (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/COBOL"
+   ]
+  ],
+  "date": "2026-11-01",
+  "img": "img/hopper.jpg",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     3.98,
+     17.21,
+     20.38,
+     44.2,
+     46.97,
+     72.23,
+     90.48,
+     93.24,
+     121.31,
+     136.81
+    ],
+    "dur": 149.9
+   },
+   "h": {
+    "starts": [
+     0.0,
+     4.68,
+     19.0,
+     22.37,
+     47.92,
+     51.26,
+     77.5,
+     98.27,
+     101.75,
+     132.1,
+     149.16
+    ],
+    "dur": 163.8
+   }
+  }
+ },
+ {
+  "id": "rosette",
+  "date": "2026-11-02",
+  "cat": "Histoire",
+  "commons": "File:Rosetta Stone.JPG",
+  "title": "La pierre de Rosette a permis de lire les hiéroglyphes après 1 400 ans de silence",
+  "lede": "Trouvée par des soldats français en Égypte en 1799, cette stèle porte le même texte en trois écritures. C'est grâce à elle que Jean-François Champollion a percé le secret des hiéroglyphes en 1822.",
+  "cap": "La pierre de Rosette, exposée au British Museum à Londres.",
+  "body": [
+   [
+    "h",
+    "Une découverte pendant la campagne d'Égypte"
+   ],
+   [
+    "p",
+    "En juillet 1799, pendant l'expédition de Bonaparte en Égypte, des soldats français renforcent un fort près de la ville de Rosette (Rachid en arabe), dans le delta du Nil. Ils mettent au jour un bloc de pierre sombre couvert d'inscriptions. L'officier Pierre-François Bouchard comprend immédiatement son importance. Mais après la défaite française, le traité d'Alexandrie de 1801 oblige la France à remettre ses antiquités aux Britanniques. La pierre est exposée au British Museum depuis 1802."
+   ],
+   [
+    "h",
+    "Un même texte en trois écritures"
+   ],
+   [
+    "p",
+    "La pierre est un fragment de stèle en granodiorite d'environ 760 kg. Elle porte un décret rédigé en 196 avant notre ère par des prêtres égyptiens en l'honneur du roi Ptolémée V. Le texte est écrit trois fois : en hiéroglyphes, l'écriture sacrée ; en démotique, l'écriture courante des Égyptiens de l'époque ; et en grec ancien, la langue de l'administration, que les savants européens savaient lire."
+   ],
+   [
+    "p",
+    "Pourquoi était-ce si précieux ? Depuis la fin du IVe siècle, plus personne ne savait lire les hiéroglyphes. Les érudits pensaient souvent qu'il s'agissait de symboles purement mystiques. Avec le grec comme traduction, on disposait enfin d'une clé."
+   ],
+   [
+    "h",
+    "La course au déchiffrement"
+   ],
+   [
+    "p",
+    "Le Britannique Thomas Young fait les premiers progrès : il comprend que les noms royaux sont entourés d'un ovale, appelé cartouche, et identifie celui de Ptolémée. Mais c'est le Français Jean-François Champollion qui trouve l'idée décisive. Il montre que les hiéroglyphes combinent des signes qui représentent des sons et des signes qui représentent des idées. Le 14 septembre 1822, selon la tradition, il se précipite chez son frère en criant « Je tiens l'affaire ! » et s'évanouit d'émotion."
+   ],
+   [
+    "p",
+    "Sa connaissance du copte, la langue liturgique des chrétiens d'Égypte, descendante de l'égyptien ancien, a été déterminante. Le 27 septembre 1822, il présente sa découverte dans sa célèbre « Lettre à M. Dacier ». Cette date est considérée comme la naissance de l'égyptologie."
+   ]
+  ],
+  "figs": [
+   [
+    "196 av. J.-C.",
+    "date du décret gravé sur la pierre"
+   ],
+   [
+    "3",
+    "écritures : hiéroglyphes, démotique et grec"
+   ],
+   [
+    "1822",
+    "déchiffrement par Champollion"
+   ]
+  ],
+  "keep": [
+   "La pierre porte le même texte en trois écritures.",
+   "Le grec ancien a servi de traduction pour décoder les hiéroglyphes.",
+   "Les hiéroglyphes mêlent des signes de sons et des signes d'idées."
+  ],
+  "quiz": [
+   {
+    "q": "Pourquoi la pierre de Rosette a-t-elle permis de déchiffrer les hiéroglyphes ?",
+    "o": [
+     "Elle contenait un alphabet complet",
+     "Elle portait le même texte en grec ancien, que l'on savait lire",
+     "Elle était accompagnée d'un dictionnaire"
+    ],
+    "a": 1,
+    "e": "Le texte grec servait de traduction : en comparant les trois versions, on pouvait retrouver le sens des hiéroglyphes."
+   },
+   {
+    "q": "Qui a déchiffré les hiéroglyphes en 1822 ?",
+    "o": [
+     "Thomas Young",
+     "Jean-François Champollion",
+     "Napoléon Bonaparte"
+    ],
+    "a": 1,
+    "e": "Champollion, en s'appuyant notamment sur sa connaissance du copte. Thomas Young avait fait les premiers progrès."
+   },
+   {
+    "q": "Où se trouve aujourd'hui la pierre de Rosette ?",
+    "o": [
+     "Au Louvre, à Paris",
+     "Au Musée égyptien du Caire",
+     "Au British Museum, à Londres"
+    ],
+    "a": 2,
+    "e": "Elle a été remise aux Britanniques par le traité d'Alexandrie en 1801 et se trouve au British Museum depuis 1802."
+   }
+  ],
+  "src": [
+   [
+    "Pierre de Rosette (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Pierre_de_Rosette"
+   ],
+   [
+    "Jean-François Champollion (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Jean-Fran%C3%A7ois_Champollion"
+   ],
+   [
+    "Lettre à M. Dacier (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Lettre_%C3%A0_M._Dacier"
+   ]
+  ],
+  "img": "img/rosette.jpg",
+  "cr": "Hans Hillewaert, CC BY-SA 4.0",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     5.76,
+     18.77,
+     22.13,
+     52.56,
+     55.54,
+     81.01,
+     95.41,
+     97.8,
+     126.19,
+     144.55
+    ],
+    "dur": 157.0
+   },
+   "h": {
+    "starts": [
+     0.0,
+     6.46,
+     20.83,
+     24.5,
+     56.7,
+     60.19,
+     86.25,
+     102.19,
+     104.76,
+     136.42,
+     156.61
+    ],
+    "dur": 170.6
+   }
+  }
+ },
+ {
+  "id": "tardigrade",
+  "date": "2026-11-03",
+  "cat": "Animaux",
+  "commons": "File:SEM image of Milnesium tardigradum in active state - journal.pone.0045682.g001-2.png",
+  "title": "Le tardigrade, un animal d'un demi-millimètre qui a survécu au vide spatial",
+  "lede": "Les tardigrades, surnommés « oursons d'eau », vivent dans les mousses de nos jardins. Déshydratés, ils peuvent résister à des conditions qui tueraient presque tous les autres animaux, y compris dix jours dans l'espace.",
+  "cap": "Un tardigrade (Milnesium tardigradum) vu au microscope électronique.",
+  "body": [
+   [
+    "h",
+    "Un petit ours à huit pattes"
+   ],
+   [
+    "p",
+    "Le tardigrade mesure en général moins d'un millimètre. Il a un corps rond, huit pattes terminées par des griffes, et une démarche lente qui lui a valu son nom, qui signifie « qui marche lentement ». Il a été décrit pour la première fois en 1773 par le pasteur allemand Johann August Ephraim Goeze, qui l'a appelé « petit ours d'eau ». On en connaît aujourd'hui plus de 1 000 espèces, des fonds océaniques jusqu'aux sommets de l'Himalaya. Vous en trouverez probablement dans la mousse d'un vieux mur."
+   ],
+   [
+    "h",
+    "La cryptobiose : mettre la vie sur pause"
+   ],
+   [
+    "p",
+    "Le secret du tardigrade s'appelle la cryptobiose. Quand son milieu s'assèche, il rétracte ses pattes, perd presque toute son eau et se roule en une petite boule appelée « tonnelet ». Son métabolisme devient quasiment indétectable. Dans cet état, il peut rester des années, puis revenir à la vie en quelques heures au contact de l'eau."
+   ],
+   [
+    "p",
+    "Pour survivre au séchage, il produit des protéines protectrices qui forment une sorte de verre à l'intérieur de ses cellules et maintiennent leurs structures en place. Une autre protéine, découverte en 2016 et appelée Dsup, protège son ADN des dégâts causés par les radiations."
+   ],
+   [
+    "h",
+    "Dix jours dans l'espace"
+   ],
+   [
+    "p",
+    "En septembre 2007, l'Agence spatiale européenne a envoyé des tardigrades déshydratés en orbite à bord de la capsule FOTON-M3. Pendant environ dix jours, ils ont été exposés directement au vide spatial et aux rayonnements cosmiques. Ceux exposés au seul vide ont bien récupéré une fois réhydratés. La plupart de ceux qui ont aussi reçu le rayonnement ultraviolet du Soleil sont morts, mais quelques-uns ont survécu et se sont même reproduits. C'était la première fois qu'un animal survivait à une exposition directe à l'espace."
+   ],
+   [
+    "p",
+    "Attention toutefois à une idée reçue : le tardigrade n'est pas immortel. Actif, il est fragile comme n'importe quel petit animal. C'est seulement dans son état de tonnelet qu'il devient si résistant."
+   ]
+  ],
+  "figs": [
+   [
+    "< 1 mm",
+    "taille de la plupart des tardigrades"
+   ],
+   [
+    "1773",
+    "première description scientifique"
+   ],
+   [
+    "~10 jours",
+    "d'exposition au vide spatial en 2007"
+   ]
+  ],
+  "keep": [
+   "Déshydraté, le tardigrade met sa vie en pause : c'est la cryptobiose.",
+   "Il a survécu au vide spatial en 2007.",
+   "Il n'est résistant que dans son état de tonnelet."
+  ],
+  "quiz": [
+   {
+    "q": "Comment s'appelle l'état dans lequel le tardigrade met sa vie en pause ?",
+    "o": [
+     "L'hibernation",
+     "La cryptobiose",
+     "La photosynthèse"
+    ],
+    "a": 1,
+    "e": "La cryptobiose : le tardigrade perd presque toute son eau et son métabolisme devient quasiment indétectable."
+   },
+   {
+    "q": "Le tardigrade est-il résistant en permanence ?",
+    "o": [
+     "Oui, il est presque indestructible",
+     "Non, seulement quand il est déshydraté en tonnelet",
+     "Non, seulement quand il fait chaud"
+    ],
+    "a": 1,
+    "e": "Actif, il est fragile. C'est l'état de tonnelet, déshydraté, qui lui permet de résister à des conditions extrêmes."
+   },
+   {
+    "q": "Où peut-on trouver facilement des tardigrades ?",
+    "o": [
+     "Dans la mousse d'un vieux mur",
+     "Uniquement dans les glaciers",
+     "Uniquement dans les grands fonds marins"
+    ],
+    "a": 0,
+    "e": "Ils vivent un peu partout, et notamment dans les mousses et les lichens."
+   }
+  ],
+  "src": [
+   [
+    "Tardigrade (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Tardigrade"
+   ],
+   [
+    "Cryptobiose (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Cryptobiose"
+   ],
+   [
+    "Les tardigrades survivent à l'espace, CORDIS (Commission européenne)",
+    "https://cordis.europa.eu/article/id/29839-water-bears-survive-space-environment-study-shows"
+   ]
+  ],
+  "img": "img/tardigrade.jpg",
+  "cr": "Schokraie et al., PLoS ONE (2012), CC BY 2.5",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     6.0,
+     18.68,
+     21.49,
+     49.83,
+     53.61,
+     73.34,
+     89.67,
+     92.0,
+     123.37,
+     136.45
+    ],
+    "dur": 149.0
+   },
+   "h": {
+    "starts": [
+     0.0,
+     6.42,
+     19.21,
+     22.02,
+     52.67,
+     56.91,
+     78.59,
+     95.8,
+     98.23,
+     131.84,
+     144.98
+    ],
+    "dur": 159.2
+   }
+  }
+ },
+ {
+  "id": "metre",
+  "date": "2026-11-04",
+  "cat": "Sciences",
+  "commons": "File:Mètre-étalon Paris.JPG",
+  "title": "Le mètre a été inventé en mesurant la Terre, de Dunkerque à Barcelone",
+  "lede": "Avant 1790, chaque région de France avait ses propres mesures. Les révolutionnaires ont voulu une unité « pour tous les temps, pour tous les peuples », tirée de la taille de la Terre elle-même.",
+  "cap": "Un des mètres étalons gravés dans le marbre à Paris, rue de Vaugirard.",
+  "body": [
+   [
+    "h",
+    "Un chaos de mesures"
+   ],
+   [
+    "p",
+    "Sous l'Ancien Régime, on comptait en pieds, en toises, en aunes ou en lieues, et leurs valeurs changeaient d'une ville à l'autre. Les historiens estiment qu'il existait des centaines de noms d'unités et des milliers de variantes locales. Commercer d'une province à l'autre devenait un casse-tête, et les fraudes étaient faciles. Les cahiers de doléances de 1789 réclament d'ailleurs une mesure unique."
+   ],
+   [
+    "h",
+    "Une unité tirée de la Terre"
+   ],
+   [
+    "p",
+    "En 1791, l'Académie des sciences propose de définir le mètre comme la dix-millionième partie de la distance entre le pôle Nord et l'équateur, en suivant le méridien qui passe par Paris. L'idée est universelle : la Terre appartient à tout le monde. Restait à mesurer ce méridien."
+   ],
+   [
+    "p",
+    "De 1792 à 1798, deux astronomes s'en chargent : Jean-Baptiste Delambre mesure la partie nord, de Dunkerque à Rodez, et Pierre Méchain la partie sud, de Rodez à Barcelone. Ils utilisent la triangulation : une chaîne de triangles dont on mesure les angles depuis des clochers et des collines. Ils travaillent en pleine Révolution, sont parfois arrêtés comme espions et doivent composer avec la guerre entre la France et l'Espagne."
+   ],
+   [
+    "h",
+    "Du platine à la lumière"
+   ],
+   [
+    "p",
+    "En 1799, un mètre en platine est déposé aux Archives nationales. Pour habituer les Parisiens, seize mètres étalons sont gravés dans le marbre en ville en 1796 et 1797. Deux sont encore visibles à leur emplacement : au 36 rue de Vaugirard et place Vendôme."
+   ],
+   [
+    "p",
+    "On sait aujourd'hui que ce mètre est un peu trop court, d'environ 0,2 millimètre, notamment à cause d'erreurs de calcul et de l'aplatissement de la Terre. Depuis 1983, il n'est plus défini par la Terre mais par la lumière : c'est la distance parcourue par la lumière dans le vide en 1/299 792 458 de seconde. Une définition reproductible dans n'importe quel laboratoire du monde."
+   ]
+  ],
+  "figs": [
+   [
+    "1/10 000 000",
+    "de la distance pôle-équateur : la définition de 1791"
+   ],
+   [
+    "1 100 km",
+    "environ, de Dunkerque à Barcelone"
+   ],
+   [
+    "0,2 mm",
+    "l'erreur du mètre de 1799"
+   ]
+  ],
+  "keep": [
+   "Le mètre devait être tiré de la taille de la Terre.",
+   "Delambre et Méchain ont mesuré le méridien de Dunkerque à Barcelone.",
+   "Depuis 1983, le mètre est défini par la vitesse de la lumière."
+  ],
+  "quiz": [
+   {
+    "q": "Comment le mètre a-t-il été défini en 1791 ?",
+    "o": [
+     "Comme la longueur du pied du roi",
+     "Comme la dix-millionième partie de la distance pôle Nord-équateur",
+     "Comme la distance parcourue par la lumière en une seconde"
+    ],
+    "a": 1,
+    "e": "Les savants voulaient une unité universelle, tirée de la Terre elle-même, en suivant le méridien de Paris."
+   },
+   {
+    "q": "Entre quelles villes Delambre et Méchain ont-ils mesuré le méridien ?",
+    "o": [
+     "Paris et Marseille",
+     "Dunkerque et Barcelone",
+     "Brest et Strasbourg"
+    ],
+    "a": 1,
+    "e": "Delambre a mesuré la partie nord, de Dunkerque à Rodez, et Méchain la partie sud, de Rodez à Barcelone."
+   },
+   {
+    "q": "Sur quoi repose la définition actuelle du mètre, depuis 1983 ?",
+    "o": [
+     "Sur un étalon en platine conservé à Sèvres",
+     "Sur la vitesse de la lumière",
+     "Sur la circonférence de la Terre"
+    ],
+    "a": 1,
+    "e": "Le mètre est la distance parcourue par la lumière dans le vide en 1/299 792 458 de seconde."
+   }
+  ],
+  "src": [
+   [
+    "Mètre (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/M%C3%A8tre"
+   ],
+   [
+    "Mètre étalon (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/M%C3%A8tre_%C3%A9talon"
+   ],
+   [
+    "Jean-Baptiste Delambre (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Jean-Baptiste_Delambre"
+   ]
+  ],
+  "img": "img/metre.jpg",
+  "cr": "LPLT, GFDL 1.2",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     5.12,
+     17.26,
+     19.25,
+     41.66,
+     44.2,
+     62.43,
+     89.22,
+     91.56,
+     110.05,
+     137.06
+    ],
+    "dur": 150.2
+   },
+   "h": {
+    "starts": [
+     0.0,
+     5.78,
+     18.48,
+     20.87,
+     45.46,
+     48.3,
+     66.97,
+     94.93,
+     97.91,
+     118.45,
+     146.2
+    ],
+    "dur": 162.2
+   }
+  }
+ },
+ {
+  "id": "krakatoa",
+  "date": "2026-11-05",
+  "cat": "Planète Terre",
+  "commons": "File:Krakatoa eruption lithograph.jpg",
+  "title": "L'éruption du Krakatoa en 1883 a produit le son le plus fort de l'histoire",
+  "lede": "Le 27 août 1883, un volcan indonésien explose avec une telle violence qu'on l'entend à 4 800 km de distance. L'onde de pression fait plusieurs fois le tour de la Terre.",
+  "cap": "Lithographie de l'éruption du Krakatoa, publiée en 1888.",
+  "body": [
+   [
+    "h",
+    "Une île qui se volatilise"
+   ],
+   [
+    "p",
+    "Le Krakatoa est une île volcanique située dans le détroit de la Sonde, entre Java et Sumatra, en Indonésie, alors colonie néerlandaise. Après plusieurs mois d'activité, le volcan connaît une série d'explosions finales le 27 août 1883. La plus violente a lieu vers 10 heures du matin. Environ les deux tiers de l'île s'effondrent dans la mer."
+   ],
+   [
+    "h",
+    "Entendu à 4 800 km"
+   ],
+   [
+    "p",
+    "Sur l'île Rodrigues, dans l'océan Indien, à environ 4 800 km de là, un responsable de la police note avoir entendu comme le grondement de canons lointains. C'est la plus grande distance connue à laquelle un son a été perçu. À cette distance, il a fallu environ quatre heures au son pour arriver. On l'a aussi entendu en Australie."
+   ],
+   [
+    "p",
+    "Au-delà de ce qu'entend l'oreille, l'explosion crée une onde de pression dans l'atmosphère. Les baromètres du monde entier l'enregistrent, y compris en Europe. Elle fait plusieurs fois le tour de la planète et reste détectable pendant environ cinq jours. C'est l'une des premières catastrophes mesurées à l'échelle mondiale grâce aux instruments scientifiques et au télégraphe."
+   ],
+   [
+    "h",
+    "Tsunamis et ciels rouges"
+   ],
+   [
+    "p",
+    "Le bilan officiel des autorités néerlandaises est de 36 417 morts. La plupart des victimes ont été emportées par des tsunamis géants qui ont détruit des villages entiers sur les côtes de Java et de Sumatra."
+   ],
+   [
+    "p",
+    "Les cendres et les gaz projetés très haut dans l'atmosphère ont fait le tour du globe. Pendant des mois, les couchers de soleil ont pris des teintes rouge sang, au point que des pompiers américains ont cru à des incendies. Ces poussières ont aussi refroidi légèrement le climat mondial pendant les années suivantes. En 1927, un nouveau volcan est sorti de la mer au même endroit : l'Anak Krakatau, « l'enfant du Krakatoa », toujours actif aujourd'hui."
+   ]
+  ],
+  "figs": [
+   [
+    "4 800 km",
+    "distance à laquelle l'explosion a été entendue"
+   ],
+   [
+    "36 417",
+    "morts selon le bilan officiel"
+   ],
+   [
+    "~5 jours",
+    "durée pendant laquelle l'onde de pression a été mesurée"
+   ]
+  ],
+  "keep": [
+   "Le Krakatoa a produit le son le plus fort jamais rapporté.",
+   "La plupart des victimes sont mortes dans les tsunamis.",
+   "Ses cendres ont rougi les couchers de soleil dans le monde entier."
+  ],
+  "quiz": [
+   {
+    "q": "À quelle distance environ l'explosion du Krakatoa a-t-elle été entendue ?",
+    "o": [
+     "48 km",
+     "480 km",
+     "4 800 km"
+    ],
+    "a": 2,
+    "e": "Sur l'île Rodrigues, dans l'océan Indien, à environ 4 800 km du volcan."
+   },
+   {
+    "q": "Quelle a été la principale cause des 36 000 morts ?",
+    "o": [
+     "Les coulées de lave",
+     "Les tsunamis",
+     "Le froid provoqué par les cendres"
+    ],
+    "a": 1,
+    "e": "Des vagues géantes ont détruit les villages côtiers de Java et de Sumatra."
+   },
+   {
+    "q": "Comment s'appelle le volcan apparu en 1927 au même endroit ?",
+    "o": [
+     "Anak Krakatau",
+     "Tambora",
+     "Pinatubo"
+    ],
+    "a": 0,
+    "e": "Anak Krakatau signifie « l'enfant du Krakatoa ». Il est toujours actif."
+   }
+  ],
+  "src": [
+   [
+    "Éruption du Krakatoa en 1883 (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/%C3%89ruption_du_Krakatoa_en_1883"
+   ],
+   [
+    "Anak Krakatau (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Anak_Krakatau"
+   ],
+   [
+    "Éruption du Krakatoa en 1883 (Techno-Science)",
+    "https://www.techno-science.net/fr/definitions/eruption-du-krakatoa-en-1883"
+   ]
+  ],
+  "img": "img/krakatoa.jpg",
+  "cr": "Parker & Coward, 1888, domaine public",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     6.24,
+     18.97,
+     21.61,
+     42.92,
+     46.34,
+     66.54,
+     88.03,
+     90.59,
+     104.1,
+     129.64
+    ],
+    "dur": 140.9
+   },
+   "h": {
+    "starts": [
+     0.0,
+     6.56,
+     20.18,
+     22.88,
+     46.43,
+     50.12,
+     72.37,
+     95.32,
+     98.3,
+     112.33,
+     139.98
+    ],
+    "dur": 152.7
+   }
+  }
+ },
+ {
+  "id": "gutenberg",
+  "date": "2026-11-06",
+  "cat": "Inventions",
+  "commons": "File:Gutenberg Bible, Lenox Copy, New York Public Library, 2009. Pic 01.jpg",
+  "title": "La Bible de Gutenberg : le livre qui a lancé la révolution de l'imprimerie",
+  "lede": "Vers 1455, à Mayence, Johannes Gutenberg achève d'imprimer une Bible avec des caractères métalliques mobiles. Environ 180 exemplaires sortent de son atelier ; une cinquantaine existent encore.",
+  "cap": "Un exemplaire de la Bible de Gutenberg, conservé à la Bibliothèque publique de New York.",
+  "body": [
+   [
+    "h",
+    "Avant Gutenberg : des livres copiés à la main"
+   ],
+   [
+    "p",
+    "Au Moyen Âge, en Europe, un livre est copié à la main, souvent par des moines. Une Bible complète peut demander plus d'un an de travail. Les livres sont donc rares et très chers. On imprime déjà des images avec des blocs de bois gravés, et en Chine puis en Corée, on a même inventé des caractères mobiles, en céramique puis en métal, bien avant l'Europe. Mais l'écriture chinoise compte des milliers de signes, ce qui rend le procédé difficile à généraliser."
+   ],
+   [
+    "h",
+    "Une combinaison d'inventions"
+   ],
+   [
+    "p",
+    "Johannes Gutenberg, orfèvre de Mayence, n'invente pas un seul objet mais un système complet. Il met au point un moule à main qui permet de fondre rapidement des milliers de lettres identiques dans un alliage de plomb, d'étain et d'antimoine. Il adapte une presse à vis, inspirée des pressoirs à vin. Et il crée une encre grasse, à base d'huile, qui adhère au métal. Les lettres peuvent être assemblées en pages, imprimées, puis réutilisées pour la page suivante."
+   ],
+   [
+    "h",
+    "La Bible à 42 lignes"
+   ],
+   [
+    "p",
+    "Sa Bible est achevée vers 1454-1455. On l'appelle aussi la « Bible à 42 lignes », du nombre de lignes de texte sur la plupart de ses pages. Environ 180 exemplaires sont imprimés, la plupart sur papier et une partie sur vélin, une peau d'animal très fine. Les lettrines et les décorations sont ajoutées à la main ensuite, si bien que chaque exemplaire est unique. Une petite cinquantaine sont conservés dans le monde, dont deux à la Bibliothèque nationale de France."
+   ],
+   [
+    "p",
+    "Les conséquences sont immenses. En quelques décennies, des imprimeries s'ouvrent dans toute l'Europe, et des millions de livres circulent avant 1500. L'imprimerie accélère la diffusion des idées, de la Réforme protestante à la révolution scientifique. Ironie de l'histoire : Gutenberg lui-même, endetté, perd son atelier au profit de son associé Johann Fust."
+   ]
+  ],
+  "figs": [
+   [
+    "~1455",
+    "achèvement de la Bible"
+   ],
+   [
+    "180",
+    "exemplaires imprimés environ"
+   ],
+   [
+    "~50",
+    "exemplaires conservés dans le monde"
+   ]
+  ],
+  "keep": [
+   "Gutenberg a inventé un système : lettres mobiles, moule, presse et encre.",
+   "Sa Bible est aussi appelée la Bible à 42 lignes.",
+   "L'imprimerie a accéléré la diffusion des idées en Europe."
+  ],
+  "quiz": [
+   {
+    "q": "Pourquoi appelle-t-on la Bible de Gutenberg la « Bible à 42 lignes » ?",
+    "o": [
+     "Parce qu'elle compte 42 chapitres",
+     "Parce que la plupart de ses pages ont 42 lignes",
+     "Parce qu'elle a été imprimée en 42 jours"
+    ],
+    "a": 1,
+    "e": "La plupart de ses pages comptent 42 lignes de texte, sur deux colonnes."
+   },
+   {
+    "q": "Les caractères mobiles ont-ils été inventés pour la première fois par Gutenberg ?",
+    "o": [
+     "Oui, c'est son invention",
+     "Non, ils existaient déjà en Chine et en Corée",
+     "Non, ils ont été inventés par les Romains"
+    ],
+    "a": 1,
+    "e": "La Chine puis la Corée les utilisaient avant lui. Gutenberg a mis au point un système complet adapté aux alphabets européens."
+   },
+   {
+    "q": "Combien d'exemplaires de la Bible de Gutenberg sont conservés aujourd'hui ?",
+    "o": [
+     "2",
+     "Une cinquantaine",
+     "Environ 1 000"
+    ],
+    "a": 1,
+    "e": "Environ 180 ont été imprimés et une petite cinquantaine ont survécu, dont deux à la BnF."
+   }
+  ],
+  "src": [
+   [
+    "Bible de Gutenberg (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Bible_de_Gutenberg"
+   ],
+   [
+    "La Bible de Gutenberg, BnF",
+    "https://www.bnf.fr/fr/mediatheque/la-bible-de-gutenberg"
+   ],
+   [
+    "Johannes Gutenberg (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Johannes_Gutenberg"
+   ]
+  ],
+  "img": "img/gutenberg.jpg",
+  "cr": "Kevin Eng, CC BY-SA 2.0",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     5.19,
+     19.3,
+     23.1,
+     51.57,
+     54.24,
+     82.02,
+     84.58,
+     116.03,
+     137.75
+    ],
+    "dur": 151.8
+   },
+   "h": {
+    "starts": [
+     0.0,
+     5.98,
+     21.22,
+     25.3,
+     55.36,
+     57.9,
+     88.31,
+     91.29,
+     123.74,
+     146.79
+    ],
+    "dur": 161.9
+   }
+  }
+ },
+ {
+  "id": "curie",
+  "date": "2026-11-07",
+  "cat": "Portrait",
+  "commons": "File:Marie Curie c. 1920s.jpg",
+  "title": "Les carnets de Marie Curie sont encore radioactifs, près de 100 ans après sa mort",
+  "lede": "Née le 7 novembre 1867 à Varsovie, Marie Curie est la seule personne à avoir reçu deux prix Nobel dans deux sciences différentes. Ses notes de laboratoire sont si contaminées qu'on les conserve dans des boîtes doublées de plomb.",
+  "cap": "Marie Curie dans les années 1920.",
+  "body": [
+   [
+    "h",
+    "De Varsovie à la Sorbonne"
+   ],
+   [
+    "p",
+    "Maria Skłodowska naît à Varsovie, alors sous domination russe, où les universités sont fermées aux femmes. Elle travaille comme gouvernante pour financer les études de sa sœur, puis part à Paris en 1891. Elle obtient une licence de physique puis de mathématiques à la Sorbonne. En 1895, elle épouse le physicien Pierre Curie."
+   ],
+   [
+    "h",
+    "Deux nouveaux éléments"
+   ],
+   [
+    "p",
+    "En 1896, Henri Becquerel découvre que l'uranium émet des rayons invisibles. Marie Curie en fait son sujet de thèse et invente le mot « radioactivité ». Avec Pierre, elle remarque qu'un minerai, la pechblende, est bien plus radioactif que l'uranium qu'il contient. Elle en conclut qu'il contient d'autres éléments inconnus. En 1898, le couple découvre le polonium, nommé en hommage à la Pologne, puis le radium. Pour isoler un dixième de gramme de radium, Marie traite plusieurs tonnes de minerai dans un hangar mal chauffé."
+   ],
+   [
+    "p",
+    "En 1903, elle partage le prix Nobel de physique avec Pierre Curie et Henri Becquerel : c'est la première femme lauréate. Après la mort de Pierre, renversé par une voiture à cheval en 1906, elle reprend sa chaire et devient la première femme professeure à la Sorbonne. En 1911, elle reçoit seule le prix Nobel de chimie."
+   ],
+   [
+    "h",
+    "Un héritage radioactif"
+   ],
+   [
+    "p",
+    "Pendant la Première Guerre mondiale, elle équipe des voitures de radiologie, surnommées les « petites Curies », pour localiser les éclats d'obus dans le corps des soldats blessés, directement près du front. Elle forme aussi des opératrices pour les utiliser."
+   ],
+   [
+    "p",
+    "À l'époque, on ignore les dangers des radiations. Marie Curie transporte des tubes de radium dans ses poches. Elle meurt en 1934 d'une maladie du sang probablement liée à cette exposition. Ses carnets, conservés à la Bibliothèque nationale de France, contiennent encore du radium 226, dont la période radioactive est d'environ 1 600 ans. Pour les consulter, il faut signer une décharge et porter un équipement de protection. En 1995, ses cendres sont transférées au Panthéon : elle est la première femme à y entrer pour ses propres mérites."
+   ]
+  ],
+  "figs": [
+   [
+    "2",
+    "prix Nobel : physique (1903) et chimie (1911)"
+   ],
+   [
+    "1898",
+    "découverte du polonium et du radium"
+   ],
+   [
+    "~1 600 ans",
+    "période radioactive du radium 226"
+   ]
+  ],
+  "keep": [
+   "Marie Curie a inventé le mot « radioactivité ».",
+   "Elle a découvert le polonium et le radium avec Pierre Curie.",
+   "Elle est la seule personne récompensée par un Nobel dans deux sciences différentes."
+  ],
+  "quiz": [
+   {
+    "q": "Dans quelles disciplines Marie Curie a-t-elle reçu ses deux prix Nobel ?",
+    "o": [
+     "Physique et chimie",
+     "Chimie et médecine",
+     "Physique et médecine"
+    ],
+    "a": 0,
+    "e": "Physique en 1903, partagé avec Pierre Curie et Henri Becquerel, puis chimie en 1911, seule."
+   },
+   {
+    "q": "D'où vient le nom du polonium ?",
+    "o": [
+     "Du pôle Nord",
+     "De la Pologne, son pays natal",
+     "D'un scientifique nommé Polon"
+    ],
+    "a": 1,
+    "e": "Marie Curie l'a nommé ainsi en hommage à la Pologne, alors privée d'indépendance."
+   },
+   {
+    "q": "Pourquoi les carnets de Marie Curie sont-ils conservés dans des boîtes doublées de plomb ?",
+    "o": [
+     "Pour les protéger de l'humidité",
+     "Parce qu'ils sont encore radioactifs",
+     "Parce qu'ils sont très précieux"
+    ],
+    "a": 1,
+    "e": "Ils contiennent encore du radium 226, dont la radioactivité diminue de moitié en 1 600 ans environ."
+   }
+  ],
+  "src": [
+   [
+    "Marie Curie (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Marie_Curie"
+   ],
+   [
+    "Radium (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Radium"
+   ],
+   [
+    "Petites Curies (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Petite_Curie"
+   ]
+  ],
+  "img": "img/curie.jpg",
+  "cr": "Photographe inconnu, domaine public",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     5.8,
+     20.31,
+     22.95,
+     44.23,
+     46.24,
+     80.11,
+     100.32,
+     102.7,
+     116.03,
+     149.96
+    ],
+    "dur": 162.3
+   },
+   "h": {
+    "starts": [
+     0.0,
+     6.14,
+     21.21,
+     24.03,
+     46.68,
+     49.14,
+     84.79,
+     105.72,
+     108.54,
+     123.69,
+     159.72
+    ],
+    "dur": 173.4
+   }
+  }
+ },
+ {
+  "id": "eiffel",
+  "date": "2026-11-08",
+  "cat": "Architecture",
+  "commons": "File:Tour Eiffel Wikimedia Commons.jpg",
+  "title": "La tour Eiffel grandit l'été et rapetisse l'hiver",
+  "lede": "Construite en fer, la tour Eiffel se dilate avec la chaleur. Selon la température, son sommet monte ou descend de plusieurs centimètres, et il s'écarte légèrement du soleil.",
+  "cap": "La tour Eiffel vue depuis le Champ-de-Mars.",
+  "body": [
+   [
+    "h",
+    "Construite en deux ans pour l'Exposition de 1889"
+   ],
+   [
+    "p",
+    "La tour est construite pour l'Exposition universelle de 1889, qui célèbre le centenaire de la Révolution française. Le projet est né dans l'entreprise de Gustave Eiffel : les ingénieurs Maurice Koechlin et Émile Nouguier en dessinent le principe, l'architecte Stephen Sauvestre lui donne son allure. Le chantier dure deux ans, deux mois et cinq jours. La tour compte 18 038 pièces métalliques assemblées par environ 2,5 millions de rivets."
+   ],
+   [
+    "h",
+    "La dilatation thermique"
+   ],
+   [
+    "p",
+    "Comme presque tous les matériaux, le fer s'allonge quand il chauffe et se contracte quand il refroidit : c'est la dilatation thermique. Sur une structure de plus de 300 mètres, ce petit effet devient mesurable. Selon les sources, la hauteur de la tour varie de 10 à 20 centimètres environ entre les grands froids de l'hiver et les fortes chaleurs de l'été."
+   ],
+   [
+    "p",
+    "Le soleil a un deuxième effet. Il ne chauffe qu'une face de la tour à la fois. Cette face s'allonge un peu plus que l'autre, et le sommet s'incline légèrement du côté opposé au soleil, de quelques centimètres. Au fil de la journée, le sommet décrit ainsi une petite courbe. Le vent la fait aussi osciller, mais de quelques centimètres seulement, même par forte tempête."
+   ],
+   [
+    "h",
+    "Un monument qui devait disparaître"
+   ],
+   [
+    "p",
+    "En 1887, avant même la fin du chantier, des artistes et écrivains, dont Guy de Maupassant et Charles Gounod, publient une protestation contre cette tour « inutile et monstrueuse ». La concession d'Eiffel ne prévoit d'ailleurs que vingt ans d'exploitation. Ce sont les expériences de télégraphie sans fil, menées depuis le sommet à partir de 1903, qui la rendent indispensable et la sauvent."
+   ],
+   [
+    "p",
+    "La tour mesurait 312 mètres à l'origine. Les antennes ajoutées au fil du temps l'ont grandie : elle atteint 330 mètres depuis l'installation d'une nouvelle antenne en 2022. Elle est repeinte environ tous les sept ans, à la main, avec une soixantaine de tonnes de peinture."
+   ]
+  ],
+  "figs": [
+   [
+    "10 à 20 cm",
+    "de variation de hauteur selon la température"
+   ],
+   [
+    "18 038",
+    "pièces métalliques"
+   ],
+   [
+    "330 m",
+    "hauteur depuis 2022, antenne comprise"
+   ]
+  ],
+  "keep": [
+   "Le fer se dilate à la chaleur : la tour grandit l'été.",
+   "Le sommet s'éloigne légèrement du soleil.",
+   "La tour devait être démontée ; la radio l'a sauvée."
+  ],
+  "quiz": [
+   {
+    "q": "Pourquoi la tour Eiffel est-elle plus haute en été ?",
+    "o": [
+     "Parce qu'on y ajoute des antennes",
+     "Parce que le fer se dilate avec la chaleur",
+     "Parce que le sol se soulève"
+    ],
+    "a": 1,
+    "e": "C'est la dilatation thermique : le fer s'allonge quand il chauffe."
+   },
+   {
+    "q": "De quel côté le sommet de la tour s'incline-t-il par temps ensoleillé ?",
+    "o": [
+     "Vers le soleil",
+     "Du côté opposé au soleil",
+     "Toujours vers le nord"
+    ],
+    "a": 1,
+    "e": "La face au soleil s'allonge plus que l'autre, ce qui fait pencher le sommet du côté opposé."
+   },
+   {
+    "q": "Qu'est-ce qui a sauvé la tour Eiffel du démontage ?",
+    "o": [
+     "Son succès touristique en 1889",
+     "Les expériences de télégraphie sans fil",
+     "Un vote des Parisiens"
+    ],
+    "a": 1,
+    "e": "Les expériences de radio menées depuis le sommet à partir de 1903 ont rendu la tour utile, et donc indispensable."
+   }
+  ],
+  "src": [
+   [
+    "Tour Eiffel (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Tour_Eiffel"
+   ],
+   [
+    "La tour Eiffel change-t-elle de taille ? (Futura Sciences)",
+    "https://www.futura-sciences.com/planete/questions-reponses/monuments-tour-eiffel-change-t-elle-taille-12124/"
+   ],
+   [
+    "Dilatation thermique (Wikipédia)",
+    "https://fr.wikipedia.org/wiki/Dilatation_thermique"
+   ]
+  ],
+  "img": "img/eiffel.jpg",
+  "cr": "Benh Lieu Song, CC BY-SA 3.0",
+  "audio": {
+   "f": {
+    "starts": [
+     0.0,
+     3.76,
+     14.89,
+     19.23,
+     46.79,
+     49.3,
+     69.85,
+     92.2,
+     95.15,
+     119.4,
+     135.98
+    ],
+    "dur": 147.3
+   },
+   "h": {
+    "starts": [
+     0.0,
+     4.46,
+     16.42,
+     21.57,
+     50.44,
+     52.98,
+     74.32,
+     98.78,
+     101.62,
+     126.42,
+     144.94
+    ],
+    "dur": 157.2
+   }
+  }
+ }
+]

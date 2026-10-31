@@ -1,6 +1,6 @@
 /* UpDate — service worker : rend l'application installable et utilisable hors ligne.
    Augmentez VERSION à chaque mise à jour de index.html pour forcer le rafraîchissement. */
-const VERSION = "update-v6";
+const VERSION = "update-v7";
 const SHELL = ["./", "index.html", "config.js", "manifest.webmanifest", "fiches.json",
   "icon-192.png", "icon-512.png", "apple-touch-icon.png", "favicon-32.png"];
 

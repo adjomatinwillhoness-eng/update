@@ -761,9 +761,12 @@ function renderAccount(){
   if(RECOVERY&&SESSION){
     box.innerHTML=`<form class="rev-card acc-form" id="accForm"><p class="rq">Choisissez un nouveau mot de passe</p>
       <label for="accPw">Nouveau mot de passe</label><input id="accPw" type="password" autocomplete="new-password" minlength="8" required>
-      <p class="rev-note">8 caractères minimum.</p>${msgHTML()}<div class="rev-act"><button class="btn" type="submit">Enregistrer</button></div></form>`;
+      <p class="rev-note">8 caractères minimum.</p>
+      <label for="accPw2">Confirmer le nouveau mot de passe</label><input id="accPw2" type="password" autocomplete="new-password" minlength="8" required>
+      ${msgHTML()}<div class="rev-act"><button class="btn" type="submit">Enregistrer</button></div></form>`;
     $("accForm").addEventListener("submit",async e=>{e.preventDefault();
       if($("accPw").value.length<8){accMsg="Le mot de passe doit contenir au moins 8 caractères.";renderAccount();return}
+      if($("accPw").value!==$("accPw2").value){accMsg="Les deux mots de passe ne sont pas identiques.";renderAccount();return}
       const {error}=await SB.auth.updateUser({password:$("accPw").value});
       if(error){accMsg="Le mot de passe n'a pas pu être changé : "+esc(frErr(error))}else{RECOVERY=false;accMsg="Mot de passe changé. Vous êtes connecté."}renderAccount()});
     return;
@@ -798,7 +801,7 @@ function renderAccount(){
       <p class="rq">${isReset?"Mot de passe oublié":isUp?"Créez votre compte UpDate":"Bon retour !"}</p>
       <p class="rev-note">${isReset?"Indiquez votre e-mail : vous recevrez un lien pour choisir un nouveau mot de passe.":isUp?"Votre progression actuelle sera rattachée à votre compte. Un e-mail de confirmation vous sera envoyé.":"Connectez-vous pour retrouver votre progression sur tous vos appareils."}</p>
       <label for="accEmail">Adresse e-mail</label><input id="accEmail" type="email" autocomplete="email" required>
-      ${isReset?"":`<label for="accPw">Mot de passe</label><input id="accPw" type="password" autocomplete="${isUp?"new-password":"current-password"}" minlength="8" required>${isUp?'<p class="rev-note">8 caractères minimum.</p>':""}`}
+      ${isReset?"":`<label for="accPw">Mot de passe</label><input id="accPw" type="password" autocomplete="${isUp?"new-password":"current-password"}" minlength="8" required>${isUp?'<p class="rev-note">8 caractères minimum.</p><label for="accPw2">Confirmer le mot de passe</label><input id="accPw2" type="password" autocomplete="new-password" minlength="8" required>':""}`}
       ${msgHTML()}
       <div class="rev-act"><button class="btn" type="submit" id="accGo">${isReset?"Envoyer le lien":isUp?"Créer mon compte":"Se connecter"}</button>
       ${isReset?'<button class="back" type="button" data-m="login">Retour</button>':accMode==="login"?'<button class="linkbtn" type="button" data-m="reset">Mot de passe oublié ?</button>':""}</div>
@@ -809,6 +812,7 @@ function renderAccount(){
     const back=()=>{if($("accEmail"))$("accEmail").value=email};
     if(!/^\S+@\S+\.\S+$/.test(email)){accMsg="Cette adresse e-mail ne semble pas valide.";renderAccount();back();return}
     if(!isReset&&pw.length<8){accMsg="Le mot de passe doit contenir au moins 8 caractères.";renderAccount();back();return}
+    if(isUp&&pw!==$("accPw2").value){accMsg="Les deux mots de passe ne sont pas identiques.";renderAccount();back();return}
     $("accGo").disabled=true;$("accGo").textContent="Un instant…";
     let r;
     if(isReset){r=await SB.auth.resetPasswordForEmail(email,{redirectTo:APP_URL});accMsg=r.error?esc(frErr(r.error)):"Si un compte existe pour cette adresse, un e-mail vient de lui être envoyé."}

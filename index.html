@@ -666,9 +666,15 @@ aud.addEventListener("ended",()=>{aud.currentTime=0;lastSeg=-2;syncUI()});
    Les règles de sécurité (supabase/setup.sql) empêchent quiconque de lire les données d'un autre compte.
    Chaque appareil fusionne sa copie locale avec la copie en ligne : rien ne se perd. */
 const CFG=window.UPDATE_CONFIG||{};
-const SB=(CFG.supabaseUrl&&CFG.supabaseAnonKey&&window.supabase&&window.supabase.createClient)
-  ?window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseAnonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}})
-  :null;
+let CFG_ERR="";
+const SB=(()=>{
+  const url=(CFG.supabaseUrl||"").trim(),key=(CFG.supabaseAnonKey||"").trim();
+  if(!url||!key)return null;
+  if(!/^https:\/\/[a-z0-9-]+\.supabase\.(co|in)\/?$/i.test(url)){CFG_ERR="L'adresse Supabase de config.js n'est pas valide : « "+url+" ». Elle doit ressembler à https://abcdefghijklmnop.supabase.co (Project Settings › Data API ou API Keys › Project URL).";return null}
+  if(!window.supabase||!window.supabase.createClient){CFG_ERR="La bibliothèque des comptes n'a pas pu être chargée. Vérifiez votre connexion, puis rechargez.";return null}
+  try{return window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}})}
+  catch(e){CFG_ERR="Les réglages Supabase de config.js sont refusés : "+(e&&e.message||e);return null}
+})();
 const APP_URL=location.origin+location.pathname;
 let SESSION=null,RECOVERY=false;
 const SY={timer:null,pushing:false,dirty:false,lastRemote:null};
@@ -717,7 +723,7 @@ function refreshAll(){
 function clearLocalProgress(){SYNC_KEYS.concat(["themes"]).forEach(k=>{try{localStorage.removeItem("update:"+k)}catch(e){}});TH={liked:[],less:[]}}
 
 async function initCloud(){
-  if(!SB){setSync("none");return}
+  if(!SB){setSync(CFG_ERR?"off":"none");if(CFG_ERR)$("syncTxt").textContent="Comptes mal configurés";return}
   setSync("local");
   SB.auth.onAuthStateChange((event,session)=>{
     const was=SESSION&&SESSION.user.id;SESSION=session;
@@ -748,6 +754,7 @@ function msgHTML(){return accMsg?`<p class="acc-msg" role="status">${accMsg}</p>
 function renderAccount(){
   const box=$("accBody");
   if(!SB){
+    if(CFG_ERR){box.innerHTML=`<div class="rev-card"><p class="rq">Les comptes sont mal configurés.</p><p class="rev-note">${esc(CFG_ERR)}</p></div>${statsHTML()}`;return}
     box.innerHTML=`<div class="rev-card"><p class="rq">Les comptes ne sont pas encore activés.</p>
       <p class="rev-note">Votre progression est enregistrée sur cet appareil. Pour créer des comptes par e-mail et synchroniser vos appareils, renseignez les deux valeurs de Supabase dans le fichier <code>config.js</code> (voir le guide d'installation).</p></div>${statsHTML()}`;return}
   if(RECOVERY&&SESSION){

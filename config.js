@@ -5,6 +5,6 @@
    définies dans supabase/setup.sql. Ne mettez JAMAIS ici la clé « service_role ».
    Tant qu'elles sont vides, l'application fonctionne sans comptes (progression gardée sur l'appareil). */
 window.UPDATE_CONFIG = {
-  supabaseUrl: "",
-  supabaseAnonKey: ""
+  supabaseUrl: "update.supabase.co",
+  supabaseAnonKey: "sb_publishable_GLXemEsXwoZaQhjgsO5OXg_2wEDtw6Y"
 };

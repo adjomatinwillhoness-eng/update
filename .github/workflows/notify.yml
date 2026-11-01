@@ -1,5 +1,6 @@
 # UpDate — notification du matin.
-# Tourne à 5 h 15 et 6 h 15 UTC ; le script n'envoie qu'à 7 h heure de Paris (été comme hiver).
+# Tourne à 5 h 15 et 6 h 15 UTC ; seule la planification qui tombe à 7 h à Paris ce jour-là envoie (été comme hiver),
+# même si GitHub la lance en retard.
 # Pour un essai immédiat : onglet Actions › « Notification du matin » › Run workflow (case « Envoyer maintenant » cochée).
 name: Notification du matin
 
@@ -32,3 +33,4 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
           FORCE_SEND: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}
+          SCHEDULE: ${{ github.event.schedule }}

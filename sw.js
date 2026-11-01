@@ -1,6 +1,10 @@
 /* UpDate — service worker : rend l'application installable et utilisable hors ligne.
    Augmentez VERSION à chaque mise à jour de index.html pour forcer le rafraîchissement. */
-const VERSION = "update-v9";
+const VERSION = "update-v10";
+// Réglages Supabase (adresse et clé publique), utiles pour renouveler un abonnement aux notifications.
+self.window = self;
+try { importScripts("config.js"); } catch (e) {}
+
 const SHELL = ["./", "index.html", "config.js", "manifest.webmanifest", "fiches.json",
   "icon-192.png", "icon-512.png", "apple-touch-icon.png", "favicon-32.png"];
 
@@ -88,4 +92,22 @@ self.addEventListener("notificationclick", e => {
     for (const c of list) { if (c.url.startsWith(self.registration.scope) && "focus" in c) { c.navigate(url).catch(() => {}); return c.focus(); } }
     return self.clients.openWindow(url);
   }));
+});
+
+// Le navigateur renouvelle parfois l'abonnement aux notifications : on se réabonne et on prévient la base,
+// pour que les notifications continuent même si l'application n'est pas rouverte.
+self.addEventListener("pushsubscriptionchange", e => {
+  e.waitUntil((async () => {
+    const old = e.oldSubscription;
+    let sub = e.newSubscription;
+    if (!sub && old && old.options) { try { sub = await self.registration.pushManager.subscribe(old.options); } catch (err) {} }
+    const cfg = self.UPDATE_CONFIG || {};
+    if (!sub || !old || !cfg.supabaseUrl || !cfg.supabaseAnonKey) return;
+    const j = sub.toJSON();
+    await fetch(cfg.supabaseUrl.replace(/\/$/, "") + "/rest/v1/rpc/rotate_push", {
+      method: "POST",
+      headers: { apikey: cfg.supabaseAnonKey, "Content-Type": "application/json" },
+      body: JSON.stringify({ old_endpoint: old.endpoint, new_endpoint: j.endpoint, new_p256dh: j.keys.p256dh, new_auth: j.keys.auth })
+    }).catch(() => {});
+  })());
 });

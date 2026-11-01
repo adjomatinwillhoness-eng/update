@@ -12,15 +12,32 @@ const VAPID_PRIVATE = process.env.VAPID_PRIVATE_KEY || "";
 const FORCE = process.env.FORCE_SEND === "true";
 const TZ = "Europe/Paris";
 const SEND_HOUR = 7; // heure de Paris visée (le workflow tourne à 5 h 15 et 6 h 15 UTC pour couvrir l'heure d'été et d'hiver)
+const SCHEDULE = process.env.SCHEDULE || ""; // ligne cron qui a déclenché l'exécution (vide en lancement manuel)
 
 function fail(msg) { console.error("Erreur : " + msg); process.exit(1); }
 if (!SERVICE_KEY) fail("le secret SUPABASE_SERVICE_ROLE_KEY est absent.");
 if (!VAPID_PRIVATE) fail("le secret VAPID_PRIVATE_KEY est absent.");
 
-const parisHour = Number(new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", hourCycle: "h23" }).format(new Date()));
-if (!FORCE && parisHour !== SEND_HOUR) {
-  console.log(`Il est ${parisHour} h à Paris : ce n'est pas l'heure d'envoi (${SEND_HOUR} h), rien à faire.`);
-  process.exit(0);
+// GitHub lance souvent les tâches planifiées avec du retard (parfois près d'une heure) :
+// on ne se fie donc pas à l'heure d'arrivée, mais à la ligne de planification qui correspond à 7 h à Paris ce jour-là
+// (5 h 15 UTC en heure d'été, 6 h 15 UTC en heure d'hiver). Une seule des deux envoie : pas de doublon.
+const now = new Date();
+const parisHour = Number(new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", hourCycle: "h23" }).format(now));
+const offset = (parisHour - now.getUTCHours() + 24) % 24; // 1 en hiver, 2 en été
+const expected = offset === 2 ? "15 5 * * *" : "15 6 * * *";
+if (!FORCE) {
+  if (SCHEDULE && SCHEDULE.trim() !== expected) {
+    console.log(`Planification « ${SCHEDULE} » : ce n'est pas celle de ${SEND_HOUR} h à Paris aujourd'hui (« ${expected} »), rien à faire.`);
+    process.exit(0);
+  }
+  if (!SCHEDULE && parisHour !== SEND_HOUR) {
+    console.log(`Il est ${parisHour} h à Paris : ce n'est pas l'heure d'envoi (${SEND_HOUR} h), rien à faire.`);
+    process.exit(0);
+  }
+  if (parisHour >= 12) {
+    console.log(`Exécution arrivée trop tard (${parisHour} h à Paris) : envoi annulé pour aujourd'hui.`);
+    process.exit(0);
+  }
 }
 
 // Adresse du site, déduite du nom du dépôt.

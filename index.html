@@ -690,12 +690,23 @@ aud.addEventListener("ended",()=>{aud.currentTime=0;lastSeg=-2;syncUI()});
    Chaque appareil fusionne sa copie locale avec la copie en ligne : rien ne se perd. */
 const CFG=window.UPDATE_CONFIG||{};
 let CFG_ERR="";
+/* Petit stockage de secours dans IndexedDB : il survit quand le système vide le localStorage. */
+const KV=(()=>{let dbp=null;
+  function db(){if(!dbp)dbp=new Promise((res,rej)=>{try{const r=indexedDB.open("update-kv",1);r.onupgradeneeded=()=>r.result.createObjectStore("kv");r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}});return dbp}
+  async function op(mode,fn){try{const d=await db();return await new Promise((res,rej)=>{const t=d.transaction("kv",mode),q=fn(t.objectStore("kv"));t.oncomplete=()=>res(q&&q.result);t.onerror=()=>rej(t.error)})}catch(e){return null}}
+  return{get:k=>op("readonly",s=>s.get(k)),set:(k,v)=>op("readwrite",s=>s.put(v,k)),del:k=>op("readwrite",s=>s.delete(k))}})();
+/* La session est écrite à la fois dans localStorage et dans IndexedDB, et relue depuis l'un ou l'autre. */
+const AUTH_STORE={
+  async getItem(k){let v=null;try{v=localStorage.getItem(k)}catch(e){}
+    if(v==null){v=await KV.get(k);if(v!=null){try{localStorage.setItem(k,v)}catch(e){}}}return v},
+  async setItem(k,v){try{localStorage.setItem(k,v)}catch(e){}await KV.set(k,v)},
+  async removeItem(k){try{localStorage.removeItem(k)}catch(e){}await KV.del(k)}};
 const SB=(()=>{
   const url=(CFG.supabaseUrl||"").trim(),key=(CFG.supabaseAnonKey||"").trim();
   if(!url||!key)return null;
   if(!/^https:\/\/[a-z0-9-]+\.supabase\.(co|in)\/?$/i.test(url)){CFG_ERR="L'adresse Supabase de config.js n'est pas valide : « "+url+" ». Elle doit ressembler à https://abcdefghijklmnop.supabase.co (Project Settings › Data API ou API Keys › Project URL).";return null}
   if(!window.supabase||!window.supabase.createClient){CFG_ERR="La bibliothèque des comptes n'a pas pu être chargée. Vérifiez votre connexion, puis rechargez.";return null}
-  try{return window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}})}
+  try{return window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storage:AUTH_STORE}})}
   catch(e){CFG_ERR="Les réglages Supabase de config.js sont refusés : "+(e&&e.message||e);return null}
 })();
 const APP_URL=location.origin+location.pathname;
@@ -720,8 +731,9 @@ function mergeState(a,b){
   return pickState(out);
 }
 function setSync(st){
-  const m={ok:["Synchronisé","ok"],busy:["Synchronisation…",""],local:["Se connecter",""],off:["Synchro en attente","warn"],none:["Sur cet appareil",""]}[st];
+  const m={ok:["Synchronisé","ok"],busy:["Synchronisation…",""],local:["Se connecter",""],off:["Synchro en attente","warn"],none:["Sur cet appareil",""],relog:["Reconnectez-vous","warn"]}[st];
   $("syncTxt").textContent=m[0];$("sync").className="sync "+m[1];
+  if(st==="relog"){$("sync").title="Votre session a expiré sur cet appareil. Vous gardez l'accès à UpDate ; reconnectez-vous pour synchroniser votre progression.";return}
   $("sync").title=st==="ok"?"Votre progression est enregistrée dans votre compte et vous suit sur tous vos appareils.":st==="local"?"Connectez-vous pour retrouver votre progression sur tous vos appareils.":"";
 }
 function schedulePush(){if(!SESSION)return;clearTimeout(SY.timer);SY.timer=setTimeout(pushNow,1200)}
@@ -756,17 +768,46 @@ async function initCloud(){
   setSync("local");
   SB.auth.onAuthStateChange((event,session)=>{
     const was=SESSION&&SESSION.user.id;SESSION=session;
+    if(session){SIGNING_OUT=false;rememberSession(session)}
     if(event==="PASSWORD_RECOVERY"){RECOVERY=true;if(GATED)ungate();openAccount();return}
-    if(session&&session.user.id!==was){pullNow();pullThemes()}
+    if(session&&session.user.id!==was){pullNow();pullThemes();setTimeout(ensurePush,0)}
     if(session&&(GATED||!STARTED))setTimeout(afterLogin,0);
-    if(!session){setSync("local");SY.lastRemote=null;if(STARTED&&!GATED)setTimeout(gate,0)}
+    if(!session){SY.lastRemote=null;
+      if(!SIGNING_OUT)setTimeout(recoverSession,0);
+      else{setSync("local");if(STARTED&&!GATED)setTimeout(gate,0)}}
     if(!$("vAccount").hidden)renderAccount();
   });
   let data={session:null};try{({data}=await SB.auth.getSession())}catch(e){}
-  if(data.session){if(!SESSION||SESSION.user.id!==data.session.user.id){SESSION=data.session;pullNow();pullThemes()}afterLogin()}
-  else if(!SESSION){gate();if(LANDING&&LANDING.error){accMode="linkerror";renderAccount()}}
-  document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&SESSION)pullNow()});
+  if(data.session){if(!SESSION||SESSION.user.id!==data.session.user.id){SESSION=data.session;rememberSession(SESSION);pullNow();pullThemes()}afterLogin()}
+  else if(!SESSION){
+    if(LANDING&&LANDING.error){gate();accMode="linkerror";renderAccount()}
+    else await recoverSession();}
+  document.addEventListener("visibilitychange",()=>{if(document.visibilityState!=="visible")return;
+    if(SESSION)pullNow();else if(store.get("remembered",null)&&!SIGNING_OUT)recoverSession();ensurePush()});
+  window.addEventListener("online",()=>{if(SESSION)pullNow();else if(store.get("remembered",null)&&!SIGNING_OUT)recoverSession()});
 }
+
+/* ---- Rester connecté ----
+   L'appareil est « mémorisé » dès la première connexion. Si la session ne peut pas être renouvelée
+   (veille prolongée, réseau absent au réveil, stockage vidé), on retente avec la dernière session connue ;
+   à défaut, UpDate reste ouvert et propose seulement de se reconnecter pour synchroniser.
+   Seul « Se déconnecter » (ou la suppression du compte) ramène à l'écran d'accueil. */
+let SIGNING_OUT=false,RECOVERING=false;
+function rememberSession(se){
+  try{store.set("remembered",{uid:se.user.id,email:se.user.email||""})}catch(e){}
+  KV.set("update:lastAuth",{rt:se.refresh_token,uid:se.user.id,email:se.user.email||""});
+  if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
+}
+async function recoverSession(){
+  if(RECOVERING||SESSION||!SB)return;RECOVERING=true;
+  const b=await KV.get("update:lastAuth");
+  if(!store.get("remembered",null)&&!(b&&b.uid)){RECOVERING=false;setSync("local");if(!GATED)gate();return} // appareil jamais connecté
+  if(b&&b.rt){try{const {data,error}=await SB.auth.refreshSession({refresh_token:b.rt});if(!error&&data&&data.session){RECOVERING=false;return}}catch(e){}}
+  RECOVERING=false;
+  if(SESSION)return;
+  setSync("relog");if(!STARTED||GATED)ungate();
+}
+function forgetDevice(){SIGNING_OUT=true;try{localStorage.removeItem("update:remembered")}catch(e){}KV.del("update:lastAuth")}
 
 /* ---- Onglet « Compte » ---- */
 let accMode="login",accMsg="";
@@ -840,10 +881,10 @@ function renderAccount(){
     renderPush();
     $("accPwBtn").addEventListener("click",async()=>{const {error}=await SB.auth.resetPasswordForEmail(u.email,{redirectTo:APP_URL});
       accMsg=error?"L'e-mail n'a pas pu être envoyé : "+esc(frErr(error)):"Un e-mail vous a été envoyé avec un lien pour choisir un nouveau mot de passe.";renderAccount()});
-    $("accOut").addEventListener("click",async()=>{clearTimeout(SY.timer);await pushNow();await disablePush(true);await SB.auth.signOut();clearLocalProgress();SESSION=null;accMsg="Vous êtes déconnecté. Votre progression reste enregistrée dans votre compte.";accMode="login";gate()});
+    $("accOut").addEventListener("click",async()=>{clearTimeout(SY.timer);await pushNow();await disablePush(true);forgetDevice();await SB.auth.signOut();clearLocalProgress();SESSION=null;accMsg="Vous êtes déconnecté. Votre progression reste enregistrée dans votre compte.";accMode="login";gate()});
     $("accDel").addEventListener("click",()=>{$("accDelBox").hidden=false;$("accDelIn").focus()});
     $("accDelIn").addEventListener("input",()=>{$("accDelGo").disabled=$("accDelIn").value.trim()!=="SUPPRIMER"});
-    $("accDelGo").addEventListener("click",async()=>{await disablePush(true);const {error}=await SB.rpc("delete_my_account");
+    $("accDelGo").addEventListener("click",async()=>{await disablePush(true);const {error}=await SB.rpc("delete_my_account");if(!error)forgetDevice();
       if(error){accMsg="La suppression a échoué : "+esc(frErr(error));renderAccount();return}
       await SB.auth.signOut();clearLocalProgress();SESSION=null;store.set("hasAccount",false);accMsg="Votre compte a été supprimé.";accMode="signup";gate()});
     return;
@@ -854,13 +895,14 @@ function renderAccount(){
       <button type="button" class="${isUp?"on":""}" data-m="signup">Créer un compte</button></div>
     <form class="rev-card acc-form" id="accForm" novalidate>
       <p class="rq">${isReset?"Mot de passe oublié":isUp?"Créez votre compte UpDate":"Bon retour !"}</p>
-      <p class="rev-note">${isReset?"Indiquez votre e-mail : vous recevrez un lien pour choisir un nouveau mot de passe.":isUp?"Un e-mail de confirmation vous sera envoyé pour activer votre compte. Votre progression vous suivra ensuite sur tous vos appareils.":"Connectez-vous pour retrouver votre progression sur tous vos appareils."}</p>
+      <p class="rev-note">${!GATED&&store.get("remembered",null)&&!isReset&&!isUp?"Votre session a expiré sur cet appareil. Vous gardez l'accès à UpDate ; reconnectez-vous pour synchroniser votre progression et vos notifications.":isReset?"Indiquez votre e-mail : vous recevrez un lien pour choisir un nouveau mot de passe.":isUp?"Un e-mail de confirmation vous sera envoyé pour activer votre compte. Votre progression vous suivra ensuite sur tous vos appareils.":"Connectez-vous pour retrouver votre progression sur tous vos appareils."}</p>
       <label for="accEmail">Adresse e-mail</label><input id="accEmail" type="email" autocomplete="email" required>
       ${isReset?"":`<label for="accPw">Mot de passe</label><input id="accPw" type="password" autocomplete="${isUp?"new-password":"current-password"}" minlength="8" required>${isUp?'<p class="rev-note">8 caractères minimum.</p><label for="accPw2">Confirmer le mot de passe</label><input id="accPw2" type="password" autocomplete="new-password" minlength="8" required>':""}`}
       ${msgHTML()}
       <div class="rev-act"><button class="btn" type="submit" id="accGo">${isReset?"Envoyer le lien":isUp?"Créer mon compte":"Se connecter"}</button>
       ${isReset?'<button class="back" type="button" data-m="login">Retour</button>':accMode==="login"?'<button class="linkbtn" type="button" data-m="reset">Mot de passe oublié ?</button>':""}</div>
     </form>${GATED?"":statsHTML()}`;
+  if(accMode==="login"&&$("accEmail")&&!$("accEmail").value){const r=store.get("remembered",null);if(r&&r.email)$("accEmail").value=r.email}
   box.querySelectorAll("[data-m]").forEach(b=>b.addEventListener("click",()=>{const em=$("accEmail")?$("accEmail").value:"";accMode=b.dataset.m;accMsg="";renderAccount();if($("accEmail"))$("accEmail").value=em}));
   $("accForm").addEventListener("submit",async e=>{
     e.preventDefault();const email=$("accEmail").value.trim(),pw=isReset?"":$("accPw").value;
@@ -942,6 +984,34 @@ const PUSH_HOUR="7 h 30";
 function b64ToU8(b){const p="=".repeat((4-b.length%4)%4),s=(b+p).replace(/-/g,"+").replace(/_/g,"/"),r=atob(s),a=new Uint8Array(r.length);for(let i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
 const pushSupported=()=>"serviceWorker" in navigator&&"PushManager" in window&&"Notification" in window;
 async function currentSub(){try{const reg=await navigator.serviceWorker.ready;return await reg.pushManager.getSubscription()}catch(e){return null}}
+/* « Notifications voulues » est mémorisé par appareil. Tant qu'il est vrai et que la permission est accordée,
+   l'abonnement est vérifié à chaque ouverture : recréé s'il a disparu, et rattaché au compte s'il manque. */
+const pushWanted=()=>store.get("pushWanted",false)===true;
+function setPushWanted(v){store.set("pushWanted",v);KV.set("update:pushWanted",v)}
+let ENSURING=false;
+async function savePushRow(sub){
+  if(!SB||!SESSION||!sub)return null;
+  const j=sub.toJSON();
+  const {data,error:e1}=await SB.from("push_subscriptions").select("id").eq("endpoint",j.endpoint).maybeSingle();
+  if(e1)return e1; if(data)return null;
+  const {error}=await SB.from("push_subscriptions").insert({user_id:SESSION.user.id,endpoint:j.endpoint,p256dh:j.keys.p256dh,auth:j.keys.auth});
+  return error;
+}
+async function ensurePush(){
+  if(ENSURING||!pushSupported()||Notification.permission!=="granted")return;
+  ENSURING=true;
+  try{
+    const reg=await navigator.serviceWorker.ready;
+    let sub=await reg.pushManager.getSubscription();
+    if(store.get("pushWanted",null)===null){const k=await KV.get("update:pushWanted");if(k===true||k===false)store.set("pushWanted",k);else if(sub)setPushWanted(true)} // stockage vidé, ou appareil activé avant cette version
+    if(pushWanted()){
+      if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64ToU8(VAPID_PUBLIC)});
+      await savePushRow(sub);
+    }
+  }catch(e){}
+  ENSURING=false;
+  if($("pushCard")&&!$("vAccount").hidden)renderPush();
+}
 let pushMsg="";
 async function renderPush(){
   const box=$("pushCard");if(!box)return;
@@ -950,7 +1020,8 @@ async function renderPush(){
     box.innerHTML=head+`<p class="rev-note">${isIOS&&!standalone()?"Sur iPhone et iPad, installez d'abord UpDate sur l'écran d'accueil (Partager › Sur l'écran d'accueil), puis ouvrez-le depuis son icône pour activer les notifications.":"Ce navigateur ne permet pas les notifications. Essayez avec Chrome, Edge, Firefox ou Safari récent."}</p>`;return}
   if(Notification.permission==="denied"){
     box.innerHTML=head+`<p class="rev-note">Les notifications sont bloquées pour UpDate dans les réglages de ce navigateur ou de cet appareil. Autorisez-les, puis revenez ici.</p>`;return}
-  const sub=await currentSub();const on=!!sub&&Notification.permission==="granted";
+  const sub=await currentSub();const on=(!!sub||pushWanted())&&Notification.permission==="granted";
+  if(on&&!sub&&!ENSURING)setTimeout(ensurePush,0);
   box.innerHTML=head+`<p class="rev-note">${on?"Activées sur cet appareil. Vous recevrez le titre de la fiche du jour vers "+PUSH_HOUR+".":"Une notification vers "+PUSH_HOUR+" avec le titre de la fiche du jour. Le réglage vaut pour cet appareil ; activez-le aussi sur vos autres appareils si vous le souhaitez."}</p>
     ${pushMsg?`<p class="acc-msg" role="status">${pushMsg}</p>`:""}
     <div class="rev-act"><button class="${on?"back":"btn"}" type="button" id="pushBtn">${on?"Désactiver sur cet appareil":"Activer les notifications"}</button></div>`;
@@ -964,15 +1035,15 @@ async function enablePush(){
     const reg=await navigator.serviceWorker.ready;
     let sub=await reg.pushManager.getSubscription();
     if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64ToU8(VAPID_PUBLIC)});
-    const j=sub.toJSON();
-    await SB.from("push_subscriptions").delete().eq("endpoint",j.endpoint);
-    const {error}=await SB.from("push_subscriptions").insert({user_id:SESSION.user.id,endpoint:j.endpoint,p256dh:j.keys.p256dh,auth:j.keys.auth});
+    const error=await savePushRow(sub);
     if(error){pushMsg="L'abonnement n'a pas pu être enregistré : "+esc(frErr(error));await sub.unsubscribe().catch(()=>{});return}
+    setPushWanted(true);
     pushMsg="C'est activé. Prochaine notification demain matin.";
     try{reg.showNotification("UpDate",{body:"Les notifications sont activées : à demain matin pour la fiche du jour.",icon:"icon-192.png",badge:"favicon-32.png",tag:"update-welcome"})}catch(e){}
   }catch(e){pushMsg="Activation impossible sur cet appareil : "+esc(e&&e.message||e)}
 }
 async function disablePush(silent){
+  setPushWanted(false);
   if(!pushSupported())return;
   const sub=await currentSub();if(!sub)return;
   const ep=sub.endpoint;
@@ -1079,7 +1150,7 @@ function ungate(){
     if(h==="#themes")openThemes();
     if(h==="#semaine")openWeek();
     if(h==="#compte")openAccount();
-    showInstall();if("serviceWorker" in navigator)navigator.serviceWorker.ready.then(precacheWeek).catch(()=>{});
+    showInstall();if("serviceWorker" in navigator)navigator.serviceWorker.ready.then(()=>{precacheWeek();ensurePush()}).catch(()=>{});
   }else if(wasGated){recordVisit();showView("fiche");render(TODAY);refreshAll()}
 }
 fetch("fiches.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(init)
